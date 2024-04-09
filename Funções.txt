@@ -1,0 +1,20 @@
+// Retorna o número de minas adjacentes
+function adjacentes() {...} (Por fazer)
+
+function flipCell() {...} (Fazer a partir do flipCard - Ficha6)
+
+function showCells() {...} (Fazer a partir do showCards - Ficha6)
+
+function hideCells() {...} (Fazer a partir do hideCards - Ficha6)
+
+function gameOver() {...} (Fazer a partir do gameOver - Ficha6)
+
+function createPanelGame(level) {...} (Fazer a partir do createPanelGame - Ficha6)
+
+function updateGameTime() {...} (Feito - Ficha6)
+
+function getTimer() {...} (Feito - Ficha6)
+
+function shuffleArray(array) {...} (Feito - Ficha6)
+
+

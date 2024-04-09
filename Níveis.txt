@@ -1,0 +1,5 @@
+básico: 9x9 –10 minas 
+
+intermédio: 16x16 – 40 minas 
+
+avançado: 30x16 – 99 minas
