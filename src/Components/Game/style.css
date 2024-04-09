@@ -1,3 +1,6 @@
-.game{
-    margin-top: 50%;
+.game {
+  display: grid;
+  margin-top: 50px;
+  justify-content: center;
+  align-content: center;
 }
