@@ -1,0 +1,17 @@
+#board {
+  display: inline-grid;
+  padding: 10px;
+  background-color: #2196f3;
+}
+
+#board.basico {
+  grid-template-columns: repeat(9, auto);
+}
+
+#board.intermedio {
+    grid-template-columns: repeat(16, auto);
+}
+
+#board.avancado {
+    grid-template-columns: repeat(16, auto);
+}
