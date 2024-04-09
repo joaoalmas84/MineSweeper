@@ -1,9 +1,14 @@
 .cell {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  width: 5px;
-  height: 5px;
+  background-image: linear-gradient(to bottom right, rgb(0, 119, 255), rgb(68, 227, 238));
+  border: 1px solid black;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  align-content: center;
+  justify-content: center;
 }
 
-/*🚩💣*/
+.cell:hover {
+  background-image: none;
+  background-color:  rgb(68, 227, 238);
+}

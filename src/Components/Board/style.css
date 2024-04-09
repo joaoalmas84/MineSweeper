@@ -1,7 +1,9 @@
 #board {
+  background-color:black;
+  border: solid 1px black;
   display: inline-grid;
-  padding: 10px;
-  background-color: #2196f3;
+  width: fit-content;
+  height: fit-content;
 }
 
 #board.basico {
@@ -9,9 +11,9 @@
 }
 
 #board.intermedio {
-    grid-template-columns: repeat(16, auto);
+  grid-template-columns: repeat(16, auto);
 }
 
 #board.avancado {
-    grid-template-columns: repeat(16, auto);
+  grid-template-columns: repeat(30, auto);
 }
