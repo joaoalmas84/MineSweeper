@@ -1,11 +1,8 @@
 import React from "react";
 
-import "./style.css"
+import "./game.css"
 
-import Menu from "../Menu";
-import Timer from "../Timer";
-import Board from "../Board";
-
+import {Board, Menu, Timer} from "../index";
 
 function Game() {
   return (

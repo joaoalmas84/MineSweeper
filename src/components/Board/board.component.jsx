@@ -1,6 +1,8 @@
 import React from "react";
-import Cell from "../Cell";
-import "./style.css";
+
+import "./board.css";
+
+import { Cell } from  "..";
 
 function Board() {
   let level = 3;

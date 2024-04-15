@@ -1,6 +1,6 @@
 import React from "react";
-import "./style.css";
 
+import "./cell.css";
 
 function Cell(props) {
   const value = props;
@@ -14,7 +14,7 @@ function Cell(props) {
     emoji = " "
   }
   
-  return ( <div className="cell">  </div> );
+  return ( <div className="cell"> 💣 </div> );
   //return ( <div className="cell">{ value }</div> );
 }
 

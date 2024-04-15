@@ -1,9 +1,13 @@
-import './App.css';
+import React from "react";
+
+import { Game } from "./components";
 
 function App() {
   return (
-    <div>
-      <p>Olá!</p>
+    <div className="container">
+      <div className="app">
+        <Game />
+      </div>
     </div>
   );
 }
