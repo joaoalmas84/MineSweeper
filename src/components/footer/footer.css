@@ -1,0 +1,12 @@
+footer {
+    margin: 20px;
+    display: grid;
+    justify-content: center;
+    color: rgb(112, 112, 112);
+    font-family:'Didot', Didot, monospace;
+}
+
+p {
+  text-align: center;  
+  margin: 0;
+}

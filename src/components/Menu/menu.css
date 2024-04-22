@@ -1,0 +1,43 @@
+.container {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+    padding: 10px;
+    margin-right: 25%;
+    margin-left: 25%;
+}
+
+.menu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+button {
+    width: fit-content;
+    justify-self: center;
+    margin-bottom: 20px;
+
+    background-color:rgb(41, 38, 38);
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 20px;
+    color: rgb(68, 198, 238);
+    border-radius: 15%;
+}
+
+select {   
+    width: fit-content;
+    justify-self: center;
+    margin-bottom: 20px;
+
+    background-color:rgb(41, 38, 38);
+    border-color: rgb(41, 38, 38);
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 20px;
+    color: rgb(68, 198, 238);
+}

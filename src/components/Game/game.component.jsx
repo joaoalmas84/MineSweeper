@@ -11,6 +11,7 @@ function Game() {
       <Timer />
       <Board />
     </div>
+
   );
 }
 

@@ -1,6 +1,21 @@
-.game {
+
+.container{
   display: grid;
-  margin-top: 50px;
   justify-content: center;
   align-content: center;
+}
+
+.game {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+
+  width: fit-content;
+  height: fit-content;
+
+  padding: 20px;
+  padding-bottom: 40px;
+
+  border-radius: 25px;
+  background-color: rgb(29, 27, 27);
 }

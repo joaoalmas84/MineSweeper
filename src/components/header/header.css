@@ -1,0 +1,15 @@
+header {
+    display: grid;
+    justify-content: center;
+    text-align: center;
+
+    margin: 20px;
+}
+
+h1 {
+    margin: 0;
+
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 50px;
+    color: rgb(68, 198, 238);
+}
