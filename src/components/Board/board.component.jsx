@@ -5,7 +5,7 @@ import "./board.css";
 import { Cell } from  "..";
 
 function Board() {
-  let level = 3;
+  let level = 1;
 
   let classLevel;
   let n;
@@ -32,8 +32,10 @@ function Board() {
   }
 
   return (
-    <div id="board" className={classLevel}>
-      {cells}
+    <div className="container">
+      <div id="board" className={classLevel}>
+        {cells}
+      </div>
     </div>
   );
 }

@@ -8,7 +8,6 @@ function Game() {
   return (
     <div className="game">
       <Menu />
-      <Timer />
       <Board />
     </div>
 

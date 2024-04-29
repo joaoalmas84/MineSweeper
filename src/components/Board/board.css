@@ -1,3 +1,9 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #board {
   background-color:black;
   border: solid 1px black;
@@ -15,5 +21,5 @@
 }
 
 #board.avancado {
-  grid-template-columns: repeat(30, auto);
+  grid-template-columns: repeat(16, auto);
 }

@@ -3,15 +3,16 @@ html {
 }
 
 .app {
+    display: grid;
     padding: 0px;
     margin: 0px;
+    justify-content: center;
+    align-items: center;
 }
 
 .container {
     display: grid;
 
     justify-content: center;
-    align-content: center;
-
-
+    align-items: center;
 }

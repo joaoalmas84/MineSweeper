@@ -1,14 +1,10 @@
-
 .container{
   display: grid;
-  justify-content: center;
-  align-content: center;
 }
 
 .game {
   display: grid;
   justify-content: center;
-  align-content: center;
 
   width: fit-content;
   height: fit-content;

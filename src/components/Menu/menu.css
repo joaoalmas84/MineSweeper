@@ -1,24 +1,32 @@
 .container {
-    display: grid;
-    justify-content: center;
-    align-items: center;
-
-    padding: 10px;
-    margin-right: 25%;
-    margin-left: 25%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
 }
 
-.menu{
+.menu {
+    display: flex;
+    flex-direction: column;
+
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: rgb(68, 198, 238);
+}
+
+.timer {
+    display: grid;
+    justify-content: right;
+    font-size: 25px;
+    height: fit-content;
+    width: 100%;
+}
+
+.meta-data {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    width: 100%;
-    padding-right: 10px;
-    padding-left: 10px;
 }
 
-button {
+.meta-data button {
     width: fit-content;
     justify-self: center;
     margin-bottom: 20px;
@@ -27,15 +35,16 @@ button {
     font-family: 'Comic Sans MS', cursive, sans-serif;
     font-size: 20px;
     color: rgb(68, 198, 238);
-    border-radius: 15%;
+    border-radius: 10%;
 }
 
-select {   
+.meta-data select {   
     width: fit-content;
     justify-self: center;
     margin-bottom: 20px;
 
     background-color:rgb(41, 38, 38);
+    border-radius: 3%;
     border-color: rgb(41, 38, 38);
     font-family: 'Comic Sans MS', cursive, sans-serif;
     font-size: 20px;
