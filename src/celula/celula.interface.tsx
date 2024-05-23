@@ -1,5 +1,5 @@
 export interface Celula {
     bomb: boolean;
-    val?: number;
+    value: number;
     state: string;
 }

@@ -29,9 +29,11 @@ function createBoard(level:number):Celula[] {
     }
 
     const board:Celula [] = Array.from({ length: nLin*nCol }, () => (
-        { bomb: false, state: NORMAL })
+        { bomb: false, value: 0, state: NORMAL})
     );
 
+    console.log(board.length);
+    
     placeMines(board, nLin*nCol, nMines);
 
     placeValues(board, nLin, nCol);
@@ -47,6 +49,7 @@ function placeMines(board1D:Celula[], nCells:number, nMines:number):void {
 
         if (!board1D[index].bomb) {
             board1D[index].bomb = true;
+            board1D[index].value = -1;
             minesPlaced++;
         }
     }
@@ -70,7 +73,7 @@ function placeValues(board1D:Celula[], nLin:number, nCol:number):void {
                 for (let i: number = -1; i <= 1; i++) {
                     for (let j: number = -1; j <= 1; j++) {
                         if (i == 0 && j == 0) { // não tem nenhuma bomba vizinha
-                            board2D[l][c].val = 0;
+                            board2D[l][c].value = 0;
                         } else if ((l + i >= 0) && (l + i < nLin) && (c + j >= 0) && (c + j < nCol)) {
                             if (board2D[l + 1][c + 1].bomb) {
                                 count++;
@@ -79,7 +82,7 @@ function placeValues(board1D:Celula[], nLin:number, nCol:number):void {
                     }
                 }
 
-                board2D[l][c].val = count;
+                board2D[l][c].value = count;
 
             }
         }
@@ -91,7 +94,7 @@ function placeValues(board1D:Celula[], nLin:number, nCol:number):void {
 function board2D_to_board1D(board2D:Celula[][], nLin:number, nCol:number):Celula[] {
     let k:number = 0;
     const board1D:Celula [] = Array.from({ length: nLin*nCol }, () => (
-        { bomb: false, state: 'empty' })
+        { bomb: false, value: 0, state: NORMAL })
     );
 
     for (let i:number = 0; i < nLin; i++) {
@@ -106,7 +109,9 @@ function board2D_to_board1D(board2D:Celula[][], nLin:number, nCol:number):Celula
 function board1D_to_board2D(board1D:Celula[], nLin:number, nCol:number):Celula[][] {
     let k:number = 0;
     const board2D: Celula[][] = Array.from({ length: nLin }, () =>
-        Array.from({ length: nCol }, () => ({ bomb: false, state: 'empty' }))
+        Array.from({ length: nCol }, () => (
+            { bomb: false, value: 0, state: 'empty' }
+        ))
     );
 
     for (let i:number = 0; i < nLin; i++) {

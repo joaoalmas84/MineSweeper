@@ -1,13 +1,15 @@
-import React from "react";
 import { useState, useEffect } from "react";
 
-function Timer(/*{ timeout, onTimer }*/) {
-    const [seconds, setSeconds] = useState(/*timeout*/);
-  /*  const [idInterval, setIdInterval] = useState(null);
+function Timer(props: any) {
+
+    const {timeout, onTimer} = props;
+
+    const [seconds, setSeconds] = useState(timeout);
+    const [idInterval, setIdInterval] = useState(0);
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setSeconds((prevSeconds) => prevSeconds - 1);
+        const interval:any = setInterval(() => {
+            setSeconds((prevSeconds:number) => prevSeconds - 1);
         }, 1000);
 
         setIdInterval(interval);
@@ -18,7 +20,7 @@ function Timer(/*{ timeout, onTimer }*/) {
     useEffect(() => {
         onTimer(seconds);
         if (seconds === 0) { clearInterval(idInterval); }
-    }, [seconds,onTimer,idInterval]);*/
+    }, [seconds,onTimer,idInterval]);
 
     return <>{seconds}</>;
 }

@@ -4,6 +4,8 @@ import "./menu.css"
 
 import { Timer } from "../index.js"
 
+import { TIMEOUTGAME_BASICO, TIMEOUTGAME_INTERMEDIO, TIMEOUTGAME_AVANCADO } from "../../constants/constants"
+
 function Menu(props:any) {
     const {gameStarted, onGameStart, selectedLevel, onLevelChange} = props;
 
@@ -11,26 +13,40 @@ function Menu(props:any) {
     // +----+ UseState Hooks +------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
 
-    const [timerAlmostDone, setTimerAlmostDone] = useState(false);
+    const [timerStyle, setTimerStyle] = useState({});
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Variaveis +-----------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
 
-    const classGameStarted = gameStarted ? "gameStarted" : "";
-    const timerStyle = timerAlmostDone ? {backgroundColor: 'red'} : "";
+    let timeout: number = 0;
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Funcoes +-------------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
 
     const handleTimer = (seg:number) => {
-        if (seg == 0) {onGameStart();}
-        else if (seg < 10) {
-            setTimerAlmostDone(true);
+        if (seg == 0) {
+            onGameStart();
+            setTimerStyle({});
+        } else if (seg == 9) {
+            console.log("timeout!");
+            setTimerStyle({ color: 'red' });
         }
     };
 
+    switch (selectedLevel) {
+        case "1":
+            timeout = TIMEOUTGAME_BASICO;
+            break;
+        case "2":
+            timeout = TIMEOUTGAME_INTERMEDIO;
+            break;
+        case "3":
+            timeout = TIMEOUTGAME_AVANCADO;
+            break;
+    }
+    
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ HTML +----------------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
@@ -38,17 +54,18 @@ function Menu(props:any) {
     return (
         <div className="container">
             <div className="menu">
-                <div className={"timer " + timerStyle}>
-                    <Timer />
-                </div>
 
                 <div className="meta-data">
 
-                    <button className="start">Start</button>
+                    <button className="start" disabled={selectedLevel === "0"} onClick={onGameStart}>
+                        {gameStarted ? "Stop" : "Start"}
+                    </button>
 
-                    <select id="level" defaultValue="0"
-                            disabled={gameStarted}
-                            onChange={onLevelChange}>
+                    <div className="timer" hidden={!gameStarted} style={timerStyle}>
+                        {gameStarted && <Timer timeout={timeout} onTimer={handleTimer} />}
+                    </div>
+
+                    <select id="level" defaultValue="0" hidden={gameStarted} onChange={onLevelChange}>
 
                         <option value="0">Nível...</option>
                         <option value="1">Básico</option>

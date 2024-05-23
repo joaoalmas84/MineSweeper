@@ -15,6 +15,8 @@ function App() {
     const [gameStarted, setGameStarted] = useState(false);
     const [selectedLevel, setSelectedLevel] = useState("0");
     const [cells, setCells] = useState<Celula[]>([]);
+    const [timerStyle, setTimerStyle] = useState({});
+
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Variaveis +-----------------------------------------------------------------------------------------------
@@ -25,10 +27,17 @@ function App() {
     // +----------------------------------------------------------------------------------------------------------------
 
     const handleGameStart = () => {
-        gameStarted ? setGameStarted(false) : setGameStarted(true);
+        if (gameStarted) {
+            console.log("stop");
+            setGameStarted(false);
+        } else {
+            console.log("start");
+            setGameStarted(true);
+        }
     }
 
     const handleLevelChange = (event:any) => {
+        console.log("levelChange");
         const { value } = event.currentTarget;
         setSelectedLevel(value);
         setCells(createBoard(value));

@@ -4,14 +4,15 @@ import { Cell } from "../index.js"
 
 import { Celula } from "../../celula/celula.interface";
 
+import { BASICO, INTERMEDIO, AVANCADO } from "../../constants/constants"
+
 function Board(props:any) {
-    const { cell, selectedLevel, gameStarted } :
-        {cell: Celula[], selectedLevel: string, gameStarted: boolean} = props;
+    const { cells, selectedLevel, gameStarted } :
+        {cells: Celula[], selectedLevel: string, gameStarted: boolean} = props;
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ UseState Hooks +------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
-
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Variaveis +-----------------------------------------------------------------------------------------------
@@ -23,31 +24,37 @@ function Board(props:any) {
     // +----+ Funcoes +-------------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
 
-    const setClassLevel = (selectedLevel:string) => {
-        switch (selectedLevel) {
-            case "1":
-                classLevel = BASICO;
-                break;
-            case "2":
-                classLevel = INTERMEDIO;
-                break;
-            case "3":
-                classLevel = AVANCADO;
-                break;
-            default:
-                break;
-        }
+    switch (selectedLevel) {
+        case "1":
+            classLevel = BASICO;
+            break;
+        case "2":
+            classLevel = INTERMEDIO;
+            break;
+        case "3":
+            classLevel = AVANCADO;
+            break;
+        default:
+            classLevel= "";
+            break;
     }
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ HTML +----------------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
 
-
     return (
         <div className="container">
             <div id="board" className={classLevel}>
-
+                {cells.map((elem: Celula, id: number) => {
+                    return (
+                        <Cell
+                            key={id}
+                            cell={elem}
+                            gameStarted={gameStarted}
+                        />
+                    )
+                })}
             </div>
         </div>
     );
