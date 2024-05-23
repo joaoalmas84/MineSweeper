@@ -2,21 +2,21 @@ import { Celula } from "../celula/celula.interface";
 
 import {NORMAL} from "../constants/constants";
 
-function createBoard(level:number):Celula[] {
+function createBoard(level: string):Celula[] {
     let nMines:number, nLin:number, nCol:number;
 
     switch (level) {
-        case 1:
+        case "1":
             nLin = nCol = 9;
             nMines = 10;
             break;
 
-        case 2:
+        case "2":
             nLin = nCol = 16;
             nMines = 40;
             break;
 
-        case 3:
+        case "3":
             nLin = 30;
             nCol = 16
             nMines = 99;
@@ -29,11 +29,11 @@ function createBoard(level:number):Celula[] {
     }
 
     const board:Celula [] = Array.from({ length: nLin*nCol }, () => (
-        { bomb: false, value: 0, state: NORMAL})
-    );
+        { bomb: false, value: 0, state: NORMAL}
+    ));
 
     console.log(board.length);
-    
+
     placeMines(board, nLin*nCol, nMines);
 
     placeValues(board, nLin, nCol);
@@ -60,7 +60,7 @@ function getRandomInt(min:number, max:number):number {
 }
 
 function placeValues(board1D:Celula[], nLin:number, nCol:number):void {
-    let count:number = 0;
+    let count: number = 0;
 
     const board2D:Celula[][] = board1D_to_board2D(board1D, nLin, nCol);
 
@@ -74,8 +74,12 @@ function placeValues(board1D:Celula[], nLin:number, nCol:number):void {
                     for (let j: number = -1; j <= 1; j++) {
                         if (i == 0 && j == 0) { // não tem nenhuma bomba vizinha
                             board2D[l][c].value = 0;
-                        } else if ((l + i >= 0) && (l + i < nLin) && (c + j >= 0) && (c + j < nCol)) {
-                            if (board2D[l + 1][c + 1].bomb) {
+                        } else if ((l + i >= 0)
+                            && (l + i < nLin)
+                            && (c + j >= 0)
+                            && (c + j < nCol)) {
+
+                            if (board2D[l + i][c + j].bomb) {
                                 count++;
                             }
                         }
@@ -106,7 +110,7 @@ function board2D_to_board1D(board2D:Celula[][], nLin:number, nCol:number):Celula
     return board1D;
 }
 
-function board1D_to_board2D(board1D:Celula[], nLin:number, nCol:number):Celula[][] {
+function board1D_to_board2D(board1D: Celula[], nLin: number, nCol: number):Celula[][] {
     let k:number = 0;
     const board2D: Celula[][] = Array.from({ length: nLin }, () =>
         Array.from({ length: nCol }, () => (
@@ -116,7 +120,9 @@ function board1D_to_board2D(board1D:Celula[], nLin:number, nCol:number):Celula[]
 
     for (let i:number = 0; i < nLin; i++) {
         for (let j:number = 0; j < nCol; j++) {
-            board2D[i][j] =  board1D[k++];
+            board2D[i][j] = board1D[k++];
+            console.log(board2D[i][j].bomb);
+            console.log(k);
         }
     }
 

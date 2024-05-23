@@ -10,5 +10,5 @@ export const PROVAVEL_MINA: string = "provavel_mina"
 
 // Niveis
 export const BASICO: string = "basico";
-export const INTERMEDIO: string = "intermadio";
+export const INTERMEDIO: string = "intermedio";
 export const AVANCADO: string = "avancado"

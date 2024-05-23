@@ -1,4 +1,5 @@
 .cell {
+  display: flex;
   background-image: linear-gradient(to bottom right, rgb(0, 119, 255), rgb(68, 227, 238));
   border: 1px solid black;
   display: inline-block;
@@ -11,4 +12,5 @@
 .cell:hover {
   background-image: none;
   background-color:  rgb(68, 227, 238);
+  cursor: pointer;
 }
