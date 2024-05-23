@@ -2,12 +2,18 @@ html {
     background-color:rgb(41, 38, 38);
 }
 
-.app {
+.App {
     display: grid;
-    padding: 0px;
-    margin: 0px;
     justify-content: center;
-    align-items: center;
+
+    width: fit-content;
+    height: fit-content;
+
+    padding: 20px;
+    padding-bottom: 40px;
+
+    border-radius: 25px;
+    background-color: rgb(29, 27, 27);
 }
 
 .container {
