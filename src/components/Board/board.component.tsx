@@ -18,7 +18,8 @@ function Board(props:any) {
     // +----+ Variaveis +-----------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
 
-    let classLevel:string;
+    let classLevel: string;
+    let classContainter: string;
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Funcoes +-------------------------------------------------------------------------------------------------
@@ -42,22 +43,25 @@ function Board(props:any) {
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ HTML +----------------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
-
-    return (
-        <div className="container">
-            <div id="board" className={classLevel}>
-                {cells.map((elem: Celula, id: number) => {
-                    return (
-                        <Cell
-                            key={id}
-                            cell={elem}
-                            gameStarted={gameStarted}
-                        />
-                    )
-                })}
+    if (classLevel != "") {
+        return (
+            <div className="container">
+                <div id="board" className={classLevel}>
+                    {cells.map((elem: Celula, id: number) => {
+                        return (
+                            <Cell
+                                key={id}
+                                cell={elem}
+                                gameStarted={gameStarted}
+                            />
+                        )
+                    })}
+                </div>
             </div>
-        </div>
-    );
+        );
+    } else  {
+        return (<div></div>);
+    }
 }
 
 export default Board;

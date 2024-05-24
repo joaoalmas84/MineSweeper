@@ -32,8 +32,6 @@ function createBoard(level: string):Celula[] {
         { bomb: false, value: 0, state: NORMAL}
     ));
 
-    console.log(board.length);
-
     placeMines(board, nLin*nCol, nMines);
 
     placeValues(board, nLin, nCol);
@@ -79,9 +77,7 @@ function placeValues(board1D:Celula[], nLin:number, nCol:number):void {
                             && (c + j >= 0)
                             && (c + j < nCol)) {
 
-                            if (board2D[l + i][c + j].bomb) {
-                                count++;
-                            }
+                            if (board2D[l + i][c + j].bomb) { count++; }
                         }
                     }
                 }
@@ -121,8 +117,6 @@ function board1D_to_board2D(board1D: Celula[], nLin: number, nCol: number):Celul
     for (let i:number = 0; i < nLin; i++) {
         for (let j:number = 0; j < nCol; j++) {
             board2D[i][j] = board1D[k++];
-            console.log(board2D[i][j].bomb);
-            console.log(k);
         }
     }
 

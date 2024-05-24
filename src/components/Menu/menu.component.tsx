@@ -30,7 +30,6 @@ function Menu(props:any) {
             onGameStart();
             setTimerStyle({});
         } else if (seg == 9) {
-            console.log("timeout!");
             setTimerStyle({ color: 'red' });
         }
     };
@@ -61,8 +60,8 @@ function Menu(props:any) {
                         {gameStarted ? "Stop" : "Start"}
                     </button>
 
-                    <div className="timer" hidden={!gameStarted} style={timerStyle}>
-                        {gameStarted && <Timer timeout={timeout} onTimer={handleTimer} />}
+                    <div className="timer" style={timerStyle}>
+                        {gameStarted && <Timer timeout={timeout} onTimer={handleTimer}/>}
                     </div>
 
                     <select id="level" defaultValue="0" hidden={gameStarted} onChange={onLevelChange}>

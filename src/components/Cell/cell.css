@@ -1,16 +1,26 @@
 .cell {
   display: flex;
-  background-image: linear-gradient(to bottom right, rgb(0, 119, 255), rgb(68, 227, 238));
   border: 1px solid black;
   display: inline-block;
+  background-image: linear-gradient(to bottom right, rgb(30, 30, 31), rgb(255, 255, 255));
+  background-color: none;
   width: 25px;
   height: 25px;
-  align-content: center;
   justify-content: center;
 }
 
-.cell:hover {
+.gameStarted {
+  background-image: linear-gradient(to bottom right, rgb(0, 119, 255), rgb(68, 227, 238));
+}
+
+.gameStarted:hover {
   background-image: none;
-  background-color:  rgb(68, 227, 238);
+  background-color: rgb(68, 238, 212);
   cursor: pointer;
+}
+
+
+.clicked {
+  background-image: none;
+  background-color: rgb(68, 238, 212);
 }
