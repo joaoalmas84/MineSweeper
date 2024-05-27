@@ -14,9 +14,7 @@ function App() {
 
     const [gameStarted, setGameStarted] = useState(false);
     const [selectedLevel, setSelectedLevel] = useState("0");
-    const [cells, setCells] = useState<Celula[]>([]);
-    const [timerStyle, setTimerStyle] = useState({});
-
+    const [cells, setCells] = useState<Celula[][]>([][0]);
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Variaveis +-----------------------------------------------------------------------------------------------
@@ -27,13 +25,8 @@ function App() {
     // +----------------------------------------------------------------------------------------------------------------
 
     const handleGameStart = () => {
-        if (gameStarted) {
-            console.log("stop");
-            setGameStarted(false);
-        } else {
-            console.log("start");
-            setGameStarted(true);
-        }
+        gameStarted ? console.log("stop") : console.log("start");
+        setGameStarted(!gameStarted);
     }
 
     const handleLevelChange = (event:any) => {
@@ -42,6 +35,11 @@ function App() {
         setSelectedLevel(value);
         setCells(createBoard(value));
     }
+
+    // +----------------------------------------------------------------------------------------------------------------
+    // +----+ Inicalizacoes +-------------------------------------------------------------------------------------------
+    // +----------------------------------------------------------------------------------------------------------------
+
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ HTML +----------------------------------------------------------------------------------------------------
@@ -63,6 +61,7 @@ function App() {
                         cells={cells}
                         selectedLevel={selectedLevel}
                         gameStarted={gameStarted}
+                        onGameStart={handleGameStart}
                     />
                 </div>
             </div>

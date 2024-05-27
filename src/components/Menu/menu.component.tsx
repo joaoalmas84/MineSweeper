@@ -25,14 +25,22 @@ function Menu(props:any) {
     // +----+ Funcoes +-------------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
 
+    const handleClickButton = () => {
+        if (!gameStarted) { onGameStart(); }
+        setTimerStyle({});
+    }
+
     const handleTimer = (seg:number) => {
         if (seg == 0) {
             onGameStart();
-            setTimerStyle({});
         } else if (seg == 9) {
             setTimerStyle({ color: 'red' });
         }
     };
+
+    // +----------------------------------------------------------------------------------------------------------------
+    // +----+ Inicalizacoes +-------------------------------------------------------------------------------------------
+    // +----------------------------------------------------------------------------------------------------------------
 
     switch (selectedLevel) {
         case "1":
@@ -45,7 +53,7 @@ function Menu(props:any) {
             timeout = TIMEOUTGAME_AVANCADO;
             break;
     }
-    
+
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ HTML +----------------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
@@ -61,7 +69,7 @@ function Menu(props:any) {
                     </button>
 
                     <div className="timer" style={timerStyle}>
-                        {gameStarted && <Timer timeout={timeout} onTimer={handleTimer}/>}
+                        {gameStarted && <p>Tempo</p>/*<Timer timeout={timeout} onTimer={handleTimer}/>*/ }
                     </div>
 
                     <select id="level" defaultValue="0" hidden={gameStarted} onChange={onLevelChange}>

@@ -1,5 +1,7 @@
 export interface Celula {
-    bomb: boolean;
+    mine: boolean;
     value: number;
-    state: string;
+    lin: number;
+    col: number;
+    revelada: boolean;
 }

@@ -1,26 +1,50 @@
 .cell {
-  display: flex;
+  display: grid;
   border: 1px solid black;
   display: inline-block;
   background-image: linear-gradient(to bottom right, rgb(30, 30, 31), rgb(255, 255, 255));
-  background-color: none;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
   width: 25px;
   height: 25px;
-  justify-content: center;
+  align-items: center;
 }
 
 .gameStarted {
   background-image: linear-gradient(to bottom right, rgb(0, 119, 255), rgb(68, 227, 238));
+  justify-content: center;
+  cursor: pointer;
 }
 
 .gameStarted:hover {
   background-image: none;
   background-color: rgb(68, 238, 212);
-  cursor: pointer;
 }
-
 
 .clicked {
   background-image: none;
   background-color: rgb(68, 238, 212);
+  cursor: default;
+}
+
+.presenca_mina {
+  background-image: linear-gradient(to bottom right, rgb(196, 132, 8), rgb(255, 204, 0));
+}
+
+.presenca_mina:hover {
+  background-color: rgb(238, 179, 68);
+}
+
+.provavel_mina {
+  background-image: linear-gradient(to bottom right, rgb(68, 157, 21), rgb(85, 255, 0));
+  color: green;
+  font-weight: 600;
+}
+
+.provavel_mina:hover {
+  background-color: rgb(125, 238, 68);
+}
+
+p {
+  justify-self: center;
+  font-weight: 600;
 }
