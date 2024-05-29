@@ -6,9 +6,8 @@ import { Celula } from "../../celula/celula.interface";
 import {NORMAL, CLICKED, PRESENCA_MINA, PROVAVEL_MINA } from "../../constants/constants";
 
 function Cell(props:any) {
-    const { cell, gameStarted, onClickCell } = props;
-
-    console.log("CELL");
+    const { cell, gameStarted, onClickCell } :
+        { cell:Celula, gameStarted:boolean, onClickCell:any } = props;
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ UseState Hooks +------------------------------------------------------------------------------------------
@@ -32,15 +31,15 @@ function Cell(props:any) {
 
         console.log(`Mouse1: celula(${cell.lin}, ${cell.col})`);
 
+        onClickCell(cell);
+
+        setState(CLICKED);
+
         if (cell.mine) {
             setContent("💣")
         } else {
             cell.value > 0 ? setContent(cell.value.toString()) : setContent("");
         }
-
-        setState(CLICKED);
-
-        onClickCell(cell);
 
     }
 
@@ -80,6 +79,13 @@ function Cell(props:any) {
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Inicalizacoes +-------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
+
+    // Para casos de re-render
+    if (cell.revelada && state != CLICKED) {
+        setState(CLICKED);
+        cell.value > 0 ? setContent(cell.value.toString()) : setContent("");
+    }
+
     if (gameStarted) {
 
         cellClass = "gameStarted";

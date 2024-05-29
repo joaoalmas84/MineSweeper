@@ -2,7 +2,7 @@
   display: grid;
   border: 1px solid black;
   display: inline-block;
-  background-image: linear-gradient(to bottom right, rgb(30, 30, 31), rgb(255, 255, 255));
+  background-image: linear-gradient(to bottom right, rgb(0, 119, 255), rgb(68, 227, 238));
   font-family: 'Comic Sans MS', cursive, sans-serif;
   width: 25px;
   height: 25px;

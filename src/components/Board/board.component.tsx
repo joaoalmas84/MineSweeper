@@ -8,13 +8,11 @@ import revelaCelulasVazias from "../../functions/revelaCelulasVazias";
 import { BASICO, INTERMEDIO, AVANCADO } from "../../constants/constants"
 
 function Board(props:any) {
-    const { cells, selectedLevel, gameStarted, onGameStart } = props
+    const { selectedLevel, cells, onCellsChange, gameStarted, onGameStart } = props
 
-    console.log("BOARD");
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ UseState Hooks +------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
-
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Variaveis +-----------------------------------------------------------------------------------------------
@@ -30,9 +28,8 @@ function Board(props:any) {
         if (cell.mine) {
             console.log("Bomb!!!");
             onGameStart();
-        } else if (cell.value == 0) {
-            console.log("Empty!!!");
-            revelaCelulasVazias(cells, cell);
+        } else {
+            onCellsChange(cell);
         }
     }
 

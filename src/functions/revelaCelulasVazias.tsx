@@ -19,12 +19,12 @@ function revelaCelulasVazias(board:Celula[][], clickedCell:Celula):Celula[][] {
             novaLin >= 0 && novaLin < numLinhasBoard &&
             novaCol >= 0 && novaCol < numColunasBoard &&
             !board[novaLin][novaCol].revelada &&
-            board[novaLin][novaCol].value >= 0
+            !board[novaLin][novaCol].mine
         ) {
 
-            console.log(`(${novaLin},${novaCol})`);
-
+            console.log(`(${novaLin},${novaCol}) -> ${board[novaLin][novaCol].value}}`);
             board[novaLin][novaCol].revelada = true;
+
             if (board[novaLin][novaCol].value == 0) {
                 revelaCelulasVazias(board, board[novaLin][novaCol]);
             }

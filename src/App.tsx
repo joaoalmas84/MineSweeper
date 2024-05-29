@@ -6,6 +6,7 @@ import { Header,Menu, Board, Footer } from "./components";
 
 import createBoard from "./functions/createBoard";
 import {Celula} from "./celula/celula.interface";
+import revelaCelulasVazias from "./functions/revelaCelulasVazias";
 
 function App() {
     // +----------------------------------------------------------------------------------------------------------------
@@ -14,7 +15,7 @@ function App() {
 
     const [gameStarted, setGameStarted] = useState(false);
     const [selectedLevel, setSelectedLevel] = useState("0");
-    const [cells, setCells] = useState<Celula[][]>([][0]);
+    const [cells, setCells] = useState<Celula[][]>([[]]);
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Variaveis +-----------------------------------------------------------------------------------------------
@@ -30,16 +31,25 @@ function App() {
     }
 
     const handleLevelChange = (event:any) => {
-        console.log("levelChange");
         const { value } = event.currentTarget;
+
+        console.log("levelChange");
+
         setSelectedLevel(value);
         setCells(createBoard(value));
+    }
+
+    const handleCellsChange = (cell:Celula) => {
+        if (cell.value == 0) {
+            console.log("Empty!!!");
+            const newBoard:Celula[][] = revelaCelulasVazias(cells, cell)
+            setCells([...newBoard]);
+        }
     }
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Inicalizacoes +-------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
-
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ HTML +----------------------------------------------------------------------------------------------------
@@ -58,8 +68,9 @@ function App() {
                     />
 
                     <Board
-                        cells={cells}
                         selectedLevel={selectedLevel}
+                        cells={cells}
+                        onCellsChange={handleCellsChange}
                         gameStarted={gameStarted}
                         onGameStart={handleGameStart}
                     />
