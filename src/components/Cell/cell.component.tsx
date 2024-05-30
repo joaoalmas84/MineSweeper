@@ -1,10 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-import { Celula } from "../../celula/celula.interface";
+import { Celula } from "../../interfaces/celula.interface";
 
-import {NORMAL, CLICKED, PRESENCA_MINA, PROVAVEL_MINA, GAME_OVER, MINE } from "../../constants/constants";
+import {
+    NORMAL,
+    CLICKED,
+    PRESENCA_MINA,
+    PROVAVEL_MINA,
+    GAME_OVER,
+    MINE,
+    STANDBY_FASE,
+    IN_GAME_FASE, GAME_OVER_FASE
+} from "../../constants/constants";
 
 import "./cell.css";
+import { State } from "../../interfaces/state.interface";
 
 function Cell(props:any) {
     const { cell, gameStarted, onClickCell } :
@@ -14,8 +24,9 @@ function Cell(props:any) {
     // +----+ UseState Hooks +------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
 
-    const [state, setState] = useState(NORMAL);
-    const [content, setContent] = useState("");
+    const [state, setState] = useState<State>(
+        {estado:NORMAL, content: "", cellStyle: {}}
+    );
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Variaveis +-----------------------------------------------------------------------------------------------
@@ -23,24 +34,28 @@ function Cell(props:any) {
 
     let cellClass:string = "";
     let cellStyle:any = {};
+    let estado:string;
+    let content:string;
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Funcoes +-------------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
 
     const handleMouse1 = () => {
-        if (state == CLICKED || !gameStarted) { return; }
+
+        if ( state.estado == CLICKED || !cell.clickable) { return; }
 
         console.log(`Mouse1: celula(${cell.lin}, ${cell.col})`);
-
-        cell.mine ? setState(MINE) : setState(CLICKED);
 
         onClickCell(cell);
 
         if (cell.mine) {
-            setContent("💣");
+            setState({estado:MINE, content:"💣", cellStyle: {}});
         } else {
-            cell.value > 0 ? setContent(cell.value.toString()) : setContent("");
+            estado = CLICKED;
+            content = cell.value > 0 ? cell.value.toString() : "";
+
+            setState({estado:estado, content:content, cellStyle: {}});
         }
 
     }
@@ -48,69 +63,120 @@ function Cell(props:any) {
     const handleMouse2 = (event:any) => {
         event.preventDefault();
 
-        if (state == CLICKED || !gameStarted) { return; }
+        if (state.estado == CLICKED || !cell.clickable) { return; }
 
         console.log(`Mouse2: celula(${cell.lin}, ${cell.col})`);
 
-        switch (state) {
+        switch (state.estado) {
             case NORMAL:
-                setState(PRESENCA_MINA);
-                setContent("🚩");
+                setState({estado:PRESENCA_MINA, content:"🚩", cellStyle: {}});
                 break;
+
             case PRESENCA_MINA:
-                setState(PROVAVEL_MINA);
-                setContent("?");
+                setState({estado:PROVAVEL_MINA, content:"?", cellStyle: {}});
                 break;
+
             case PROVAVEL_MINA:
-                setState(NORMAL);
-                setContent("");
+                setState({estado:NORMAL, content:"", cellStyle: {}});
                 break;
+
             default:
                 break;
         }
+    }
+
+    const renderStandBy = () => {
+        cellClass = estado != NORMAL ? estado : "";
+
+        cell.renderType = "";
+
+        setState({estado:NORMAL, content:"", cellStyle: {}});
+    }
+
+    const renderInGame = () => {
+
+        if (cell.revelada && [NORMAL, PRESENCA_MINA, PROVAVEL_MINA].includes(state.estado)) {
+
+            estado = CLICKED;
+            content = cell.value > 0 ? cell.value.toString() : "";
+
+            switch (cell.value) {
+                case 1:
+                    cellStyle = { color: 'white' };
+                    break;
+                case 2:
+                    cellStyle = { color: 'lawngreen' };
+                    break;
+                case 3:
+                    cellStyle = { color: 'red' };
+                    break;
+                case 4:
+                    cellStyle = { color: 'darkblue' };
+                    break;
+                default:
+                    cellStyle = {};
+                    break;
+            }
+
+            cell.renderType = "";
+
+            setState({estado:estado, content:content, cellStyle: {cellStyle}});
+        }
+
+    }
+
+    const renderGameOver = () => {
+
+        if (!cell.mine) {
+
+            if (state.estado == CLICKED) {
+                estado = state.estado + " " + GAME_OVER;
+            } else {
+                estado = GAME_OVER;
+            }
+
+            content = state.content;
+
+        } else {
+
+            if (state.estado == MINE) {
+                estado = state.estado + " " + GAME_OVER;
+            } else {
+                estado = GAME_OVER;
+            }
+
+            content = "💣";
+        }
+
+        cell.renderType = "";
+
+        setState({estado:estado, content:content, cellStyle: {}});
     }
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ UseEffects +----------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
 
-    // +----------------------------------------------------------------------------------------------------------------
-    // +----+ Render +--------------------------------------------------------------------------------------------------
-    // +----------------------------------------------------------------------------------------------------------------
-
-    if (cell.revelada && [NORMAL, PRESENCA_MINA, PROVAVEL_MINA].includes(state)) {
-
-        if (cell.mine) {
-            setContent("💣");
-        } else {
-            cell.value > 0 ? setContent(cell.value.toString()) : setContent("");
-        }
-
-        gameStarted ? setState(CLICKED) : setState(GAME_OVER);
-
-    }
-
-    cellClass = gameStarted ? "gameStarted " + state : state;
-
-    if (cell.value > 0) {
-        switch (content) {
-            case "1":
-                cellStyle = { color: 'white' }
+    useEffect(() => {
+        switch (cell.renderType) {
+            case STANDBY_FASE:
+                console.log("Standby");
+                renderStandBy();
                 break;
-            case "2":
-                cellStyle = { color: 'lawngreen' }
+            case IN_GAME_FASE:
+                console.log("InGame");
+                renderInGame();
                 break;
-            case "3":
-                cellStyle = { color: 'red' }
-                break;
-            case "4":
-                cellStyle = { color: 'darkblue' }
+            case GAME_OVER_FASE:
+                console.log("GameOver");
+                renderGameOver();
                 break;
             default:
-                cellStyle = {};
                 break;
         }
-    }
+    });
+
+    state.cellStyle.toString();
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ HTML +----------------------------------------------------------------------------------------------------
@@ -118,12 +184,12 @@ function Cell(props:any) {
 
     return (
         <div
-            className={"cell " + cellClass}
+            className={"cell " + state.estado}
             onClick={handleMouse1}
             onContextMenu={handleMouse2}
-            style={cellStyle}
+            style={state.cellStyle}
         >
-            <p>{ content }</p>
+            <p>{ state.content }</p>
 
         </div>
     );

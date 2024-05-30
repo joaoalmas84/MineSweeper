@@ -4,4 +4,6 @@ export interface Celula {
     lin: number;
     col: number;
     revelada: boolean;
+    clickable: boolean;
+    renderType: string;
 }

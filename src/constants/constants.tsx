@@ -15,3 +15,8 @@ export const MINE: string = "mine";
 export const BASICO: string = "basico";
 export const INTERMEDIO: string = "intermedio";
 export const AVANCADO: string = "avancado"
+
+// RenderTypes
+export const STANDBY_FASE: string = "standby_fase";
+export const IN_GAME_FASE: string = "in_game_fase";
+export const GAME_OVER_FASE: string = "game_over_fase";

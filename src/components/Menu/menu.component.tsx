@@ -7,7 +7,7 @@ import { TIMEOUTGAME_BASICO, TIMEOUTGAME_INTERMEDIO, TIMEOUTGAME_AVANCADO } from
 import "./menu.css"
 
 function Menu(props:any) {
-    const {gameStarted, onGameStart, onGameOver, selectedLevel, onLevelChange} = props;
+    const {gameStarted, onGameReset, onGameOver, selectedLevel, onLevelChange} = props;
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ UseState Hooks +------------------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ function Menu(props:any) {
     // +----------------------------------------------------------------------------------------------------------------
 
     const handleClickButton = () => {
-        gameStarted ? onGameOver() : onGameStart();
+        gameStarted ? onGameOver() : onGameReset();
         setTimerStyle({});
     }
 
@@ -65,7 +65,7 @@ function Menu(props:any) {
                 <div className="meta-data">
 
                     <button className="start" disabled={selectedLevel === "0"} onClick={handleClickButton}>
-                        {gameStarted ? "Stop" : "Start"}
+                        {gameStarted ? "Stop" : "Reset"}
                     </button>
 
                     <div className="timer" style={timerStyle}>

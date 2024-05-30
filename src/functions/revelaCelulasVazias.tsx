@@ -1,4 +1,5 @@
-import { Celula } from "../celula/celula.interface";
+import { Celula } from "../interfaces/celula.interface";
+import {IN_GAME_FASE} from "../constants/constants";
 
 function revelaCelulasVazias(board:Celula[][], clickedCell:Celula):Celula[][] {
     const numLinhasBoard:number = board.length;
@@ -23,6 +24,7 @@ function revelaCelulasVazias(board:Celula[][], clickedCell:Celula):Celula[][] {
         ) {
 
             board[novaLin][novaCol].revelada = true;
+            board[novaLin][novaCol].renderType = IN_GAME_FASE;
 
             if (board[novaLin][novaCol].value == 0) {
                 revelaCelulasVazias(board, board[novaLin][novaCol]);

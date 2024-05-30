@@ -1,4 +1,5 @@
-import { Celula } from "../celula/celula.interface";
+import { Celula } from "../interfaces/celula.interface";
+import {STANDBY_FASE} from "../constants/constants";
 
 function createBoard(level: string):Celula[][] {
     let nMines:number, nLin:number, nCol:number;
@@ -28,7 +29,10 @@ function createBoard(level: string):Celula[][] {
 
     const board: Celula[][] = Array.from({ length: nLin }, (_, linIndex:number) =>
         Array.from({ length: nCol }, (_, colIndex:number) => (
-            { mine: false, value: 0, lin: linIndex,  col: colIndex, revelada: false}
+            {
+                mine: false, value: 0, lin: linIndex,  col: colIndex, revelada: false,
+                clickable: true, renderType: STANDBY_FASE
+            }
         ))
     );
 

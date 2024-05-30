@@ -2,11 +2,11 @@ import { useState } from "react";
 
 import { Header,Menu, Board, Footer } from "./components";
 
-import { Celula } from "./celula/celula.interface";
+import { Celula } from "./interfaces/celula.interface";
 
 import createBoard from "./functions/createBoard";
 import revelaCelulasVazias from "./functions/revelaCelulasVazias";
-import revelaCelulasTodas from "./functions/revelaCelulasTodas";
+import revelaCelulasTodas from "./functions/revelaMinas";
 
 import "./App.css"
 import escondeCelulasTodas from "./functions/escondeCelulasTodas";
@@ -31,19 +31,24 @@ function App() {
     const handleGameStart = () => {
         console.log("Start!!!");
 
-        const newBoard:Celula[][] = escondeCelulasTodas(createBoard(selectedLevel));
-
-        setCells([...newBoard]);
         setGameStarted(true);
-
     }
 
     const handleGameOver = () => {
-        console.log("Over!!!");
         const newBoard:Celula[][] = revelaCelulasTodas(cells);
+
+        console.log("Over!!!");
 
         setCells([...newBoard]);
         setGameStarted(false);
+    }
+
+    const handleReset = () => {
+        const newBoard:Celula[][] = createBoard(selectedLevel);
+
+        console.log("Reset!!!");
+
+        setCells([...newBoard]);
     }
 
     const handleLevelChange = (event:any) => {
@@ -79,7 +84,7 @@ function App() {
                 <div className="container">
                     <Menu
                         gameStarted={gameStarted}
-                        onGameStart={handleGameStart}
+                        onGameReset={handleReset}
                         onGameOver={handleGameOver}
                         selectedLevel={selectedLevel}
                         onLevelChange={handleLevelChange}
@@ -91,6 +96,7 @@ function App() {
                         onCellsChange={handleCellsChange}
                         gameStarted={gameStarted}
                         onGameOver={handleGameOver}
+                        onGameStart={handleGameStart}
                     />
                 </div>
             </div>

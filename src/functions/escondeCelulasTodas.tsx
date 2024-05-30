@@ -1,4 +1,4 @@
-import { Celula } from "../celula/celula.interface";
+import { Celula } from "../interfaces/celula.interface";
 
 function escondeCelulasTodas(board:Celula[][]):Celula[][] {
     const nLin:number = board.length;

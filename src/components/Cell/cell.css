@@ -10,15 +10,11 @@
   color: white;
 }
 
-.gameStarted {
-  background-image: linear-gradient(to bottom right, rgb(0, 119, 255), rgb(68, 227, 238));
-  justify-content: center;
-  cursor: pointer;
-}
-
-.gameStarted:hover {
+.cell:hover {
   background-image: none;
   background-color: rgb(68, 238, 212);
+  justify-content: center;
+  cursor: pointer;
 }
 
 .clicked,
@@ -29,9 +25,14 @@
   cursor: default;
 }
 
+.game_over {
+  pointer-events: none;
+}
+
 .mine {
   background-image: none;
   background-color: #8f0909;
+  pointer-events: none;
 }
 
 .presenca_mina {
