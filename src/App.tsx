@@ -10,6 +10,7 @@ import revelaCelulasTodas from "./functions/revelaMinas";
 
 import "./App.css"
 import escondeCelulasTodas from "./functions/escondeCelulasTodas";
+import checkClickable from "./functions/checkClickable";
 
 function App() {
     // +----------------------------------------------------------------------------------------------------------------
@@ -45,6 +46,8 @@ function App() {
 
     const handleReset = () => {
         const newBoard:Celula[][] = createBoard(selectedLevel);
+
+        if (checkClickable(cells)) { return; }
 
         console.log("Reset!!!");
 

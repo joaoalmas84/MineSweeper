@@ -65,11 +65,11 @@ function Menu(props:any) {
                 <div className="meta-data">
 
                     <button className="start" disabled={selectedLevel === "0"} onClick={handleClickButton}>
-                        {gameStarted ? "Stop" : "Reset"}
+                        {gameStarted ? "Terminar" : "Novo Jogo"}
                     </button>
 
                     <div className="timer" style={timerStyle}>
-                        {gameStarted && <p>Tempo</p>/*<Timer timeout={timeout} onTimer={handleTimer}/>*/ }
+                        {gameStarted && <Timer timeout={timeout} onTimer={handleTimer}/>}
                     </div>
 
                     <select id="level" defaultValue="0" hidden={gameStarted} onChange={onLevelChange}>

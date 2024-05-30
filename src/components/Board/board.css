@@ -24,3 +24,10 @@
 #board.avancado {
   grid-template-columns: repeat(16, auto);
 }
+
+#msg {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-size: 15px;
+  color: rgb(68, 198, 238);
+  margin-bottom: 10px;
+}

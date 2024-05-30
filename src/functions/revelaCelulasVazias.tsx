@@ -11,6 +11,7 @@ function revelaCelulasVazias(board:Celula[][], clickedCell:Celula):Celula[][] {
     ]
 
     clickedCell.revelada = true;
+    clickedCell.renderType = IN_GAME_FASE;
 
     for (const[l, c] of direcoes) {
         const novaLin:number = clickedCell.lin + l;

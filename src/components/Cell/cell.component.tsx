@@ -25,7 +25,7 @@ function Cell(props:any) {
     // +----------------------------------------------------------------------------------------------------------------
 
     const [state, setState] = useState<State>(
-        {estado:NORMAL, content: "", cellStyle: {}}
+        {estado:NORMAL, content: ""}
     );
 
     // +----------------------------------------------------------------------------------------------------------------
@@ -49,13 +49,13 @@ function Cell(props:any) {
 
         onClickCell(cell);
 
-        if (cell.mine) {
-            setState({estado:MINE, content:"💣", cellStyle: {}});
+       if (cell.mine) {
+            setState({estado:MINE, content:"💣"});
         } else {
             estado = CLICKED;
             content = cell.value > 0 ? cell.value.toString() : "";
 
-            setState({estado:estado, content:content, cellStyle: {}});
+            setState({estado:estado, content:content});
         }
 
     }
@@ -69,15 +69,15 @@ function Cell(props:any) {
 
         switch (state.estado) {
             case NORMAL:
-                setState({estado:PRESENCA_MINA, content:"🚩", cellStyle: {}});
+                setState({estado:PRESENCA_MINA, content:"🚩"});
                 break;
 
             case PRESENCA_MINA:
-                setState({estado:PROVAVEL_MINA, content:"?", cellStyle: {}});
+                setState({estado:PROVAVEL_MINA, content:"?"});
                 break;
 
             case PROVAVEL_MINA:
-                setState({estado:NORMAL, content:"", cellStyle: {}});
+                setState({estado:NORMAL, content:""});
                 break;
 
             default:
@@ -90,7 +90,7 @@ function Cell(props:any) {
 
         cell.renderType = "";
 
-        setState({estado:NORMAL, content:"", cellStyle: {}});
+        setState({estado:NORMAL, content:""});
     }
 
     const renderInGame = () => {
@@ -100,27 +100,9 @@ function Cell(props:any) {
             estado = CLICKED;
             content = cell.value > 0 ? cell.value.toString() : "";
 
-            switch (cell.value) {
-                case 1:
-                    cellStyle = { color: 'white' };
-                    break;
-                case 2:
-                    cellStyle = { color: 'lawngreen' };
-                    break;
-                case 3:
-                    cellStyle = { color: 'red' };
-                    break;
-                case 4:
-                    cellStyle = { color: 'darkblue' };
-                    break;
-                default:
-                    cellStyle = {};
-                    break;
-            }
-
             cell.renderType = "";
 
-            setState({estado:estado, content:content, cellStyle: {cellStyle}});
+            setState({estado: estado, content: content});
         }
 
     }
@@ -150,7 +132,7 @@ function Cell(props:any) {
 
         cell.renderType = "";
 
-        setState({estado:estado, content:content, cellStyle: {}});
+        setState({estado:estado, content:content});
     }
 
     // +----------------------------------------------------------------------------------------------------------------
@@ -176,8 +158,6 @@ function Cell(props:any) {
         }
     });
 
-    state.cellStyle.toString();
-
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ HTML +----------------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
@@ -187,7 +167,7 @@ function Cell(props:any) {
             className={"cell " + state.estado}
             onClick={handleMouse1}
             onContextMenu={handleMouse2}
-            style={state.cellStyle}
+            style={cell.color}
         >
             <p>{ state.content }</p>
 

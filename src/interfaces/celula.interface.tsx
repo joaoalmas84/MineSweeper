@@ -6,4 +6,5 @@ export interface Celula {
     revelada: boolean;
     clickable: boolean;
     renderType: string;
+    color: any;
 }

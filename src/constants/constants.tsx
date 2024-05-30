@@ -1,5 +1,5 @@
 // Timeouts
-export const TIMEOUTGAME_BASICO: number = 20
+export const TIMEOUTGAME_BASICO: number = 60
 export const TIMEOUTGAME_INTERMEDIO: number = 60
 export const TIMEOUTGAME_AVANCADO: number = 180
 

@@ -31,7 +31,7 @@ function createBoard(level: string):Celula[][] {
         Array.from({ length: nCol }, (_, colIndex:number) => (
             {
                 mine: false, value: 0, lin: linIndex,  col: colIndex, revelada: false,
-                clickable: true, renderType: STANDBY_FASE
+                clickable: true, renderType: STANDBY_FASE, color: {}
             }
         ))
     );
@@ -86,11 +86,36 @@ function placeValues(board:Celula[][], nLin:number, nCol:number):void {
                 }
 
                 board[l][c].value = count;
+                board[l][c].color = setColor(count);
 
             }
         }
     }
 
+}
+
+function setColor(value: number):any {
+    let cellStyle:any;
+
+    switch (value) {
+        case 1:
+            cellStyle = { color: '#00e5ff' };
+            break;
+        case 2:
+            cellStyle = { color: 'lawngreen' };
+            break;
+        case 3:
+            cellStyle = { color: 'red' };
+            break;
+        case 4:
+            cellStyle = { color: 'darkblue' };
+            break;
+        default:
+            cellStyle = {};
+            break;
+    }
+
+    return cellStyle;
 }
 
 export default createBoard;

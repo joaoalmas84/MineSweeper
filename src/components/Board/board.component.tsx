@@ -4,7 +4,10 @@ import { Celula } from "../../interfaces/celula.interface";
 
 import { BASICO, INTERMEDIO, AVANCADO } from "../../constants/constants"
 
+import checkClickable from "../../functions/checkClickable";
+
 import "./board.css";
+
 function Board(props:any) {
     const { selectedLevel, cells, onCellsChange, gameStarted, onGameOver, onGameStart} = props
 
@@ -58,9 +61,14 @@ function Board(props:any) {
     if (classLevel != "") {
         return (
             <div className="container">
+
+                <div id="msg" hidden={!checkClickable(cells) || gameStarted}>
+                    <p>Clica numa célula para começar a jogar!</p>
+                </div>
+
                 <div id="board" className={classLevel}>
-                    {cells.map((lin:Celula[], linIndex:number) => (
-                        lin.map((elem:Celula, colIndex:number) => (
+                    {cells.map((lin: Celula[], linIndex: number) => (
+                        lin.map((elem: Celula, colIndex: number) => (
                             <Cell
                                 key={`${linIndex}-${colIndex}`}
                                 cell={elem}
@@ -72,7 +80,7 @@ function Board(props:any) {
                 </div>
             </div>
         );
-    } else  {
+    } else {
         return (<div></div>);
     }
 }
