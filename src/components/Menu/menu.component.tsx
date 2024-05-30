@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-import "./menu.css"
-
 import { Timer } from "../index.js"
 
 import { TIMEOUTGAME_BASICO, TIMEOUTGAME_INTERMEDIO, TIMEOUTGAME_AVANCADO } from "../../constants/constants"
 
+import "./menu.css"
+
 function Menu(props:any) {
-    const {gameStarted, onGameStart, selectedLevel, onLevelChange} = props;
+    const {gameStarted, onGameStart, onGameOver, selectedLevel, onLevelChange} = props;
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ UseState Hooks +------------------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ function Menu(props:any) {
     // +----------------------------------------------------------------------------------------------------------------
 
     const handleClickButton = () => {
-        if (!gameStarted) { onGameStart(); }
+        gameStarted ? onGameOver() : onGameStart();
         setTimerStyle({});
     }
 
@@ -64,7 +64,7 @@ function Menu(props:any) {
 
                 <div className="meta-data">
 
-                    <button className="start" disabled={selectedLevel === "0"} onClick={onGameStart}>
+                    <button className="start" disabled={selectedLevel === "0"} onClick={handleClickButton}>
                         {gameStarted ? "Stop" : "Start"}
                     </button>
 

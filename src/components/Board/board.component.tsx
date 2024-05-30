@@ -1,14 +1,12 @@
-import "./board.css";
-
-import { useState } from "react";
+import { Cell } from "../index.js"
 
 import { Celula } from "../../celula/celula.interface";
-import { Cell } from "../index.js"
-import revelaCelulasVazias from "../../functions/revelaCelulasVazias";
+
 import { BASICO, INTERMEDIO, AVANCADO } from "../../constants/constants"
 
+import "./board.css";
 function Board(props:any) {
-    const { selectedLevel, cells, onCellsChange, gameStarted, onGameStart } = props
+    const { selectedLevel, cells, onCellsChange, gameStarted, onGameOver } = props
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ UseState Hooks +------------------------------------------------------------------------------------------
@@ -27,7 +25,7 @@ function Board(props:any) {
     const handleClickCell = (cell:Celula) => {
         if (cell.mine) {
             console.log("Bomb!!!");
-            onGameStart();
+            onGameOver();
         } else {
             onCellsChange(cell);
         }

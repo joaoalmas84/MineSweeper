@@ -8,6 +8,8 @@ export const NORMAL: string = "normal";
 export const CLICKED: string = "clicked";
 export const PRESENCA_MINA: string = "presenca_mina";
 export const PROVAVEL_MINA: string = "provavel_mina"
+export const GAME_OVER: string = "game_over";
+export const MINE: string = "mine";
 
 // Niveis
 export const BASICO: string = "basico";

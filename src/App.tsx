@@ -1,12 +1,15 @@
 import { useState } from "react";
 
-import "./App.css"
-
 import { Header,Menu, Board, Footer } from "./components";
 
+import { Celula } from "./celula/celula.interface";
+
 import createBoard from "./functions/createBoard";
-import {Celula} from "./celula/celula.interface";
 import revelaCelulasVazias from "./functions/revelaCelulasVazias";
+import revelaCelulasTodas from "./functions/revelaCelulasTodas";
+
+import "./App.css"
+import escondeCelulasTodas from "./functions/escondeCelulasTodas";
 
 function App() {
     // +----------------------------------------------------------------------------------------------------------------
@@ -26,17 +29,31 @@ function App() {
     // +----------------------------------------------------------------------------------------------------------------
 
     const handleGameStart = () => {
-        gameStarted ? console.log("stop") : console.log("start");
-        setGameStarted(!gameStarted);
+        console.log("Start!!!");
+
+        const newBoard:Celula[][] = escondeCelulasTodas(createBoard(selectedLevel));
+
+        setCells([...newBoard]);
+        setGameStarted(true);
+
+    }
+
+    const handleGameOver = () => {
+        console.log("Over!!!");
+        const newBoard:Celula[][] = revelaCelulasTodas(cells);
+
+        setCells([...newBoard]);
+        setGameStarted(false);
     }
 
     const handleLevelChange = (event:any) => {
         const { value } = event.currentTarget;
+        const newBoard:Celula[][] = createBoard(value);
 
         console.log("levelChange");
 
         setSelectedLevel(value);
-        setCells(createBoard(value));
+        setCells([...newBoard]);
     }
 
     const handleCellsChange = (cell:Celula) => {
@@ -63,6 +80,7 @@ function App() {
                     <Menu
                         gameStarted={gameStarted}
                         onGameStart={handleGameStart}
+                        onGameOver={handleGameOver}
                         selectedLevel={selectedLevel}
                         onLevelChange={handleLevelChange}
                     />
@@ -72,7 +90,7 @@ function App() {
                         cells={cells}
                         onCellsChange={handleCellsChange}
                         gameStarted={gameStarted}
-                        onGameStart={handleGameStart}
+                        onGameOver={handleGameOver}
                     />
                 </div>
             </div>

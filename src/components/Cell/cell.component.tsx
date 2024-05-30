@@ -1,9 +1,10 @@
-import React, {useEffect, useState } from "react";
-
-import "./cell.css";
+import { useState } from "react";
 
 import { Celula } from "../../celula/celula.interface";
-import {NORMAL, CLICKED, PRESENCA_MINA, PROVAVEL_MINA } from "../../constants/constants";
+
+import {NORMAL, CLICKED, PRESENCA_MINA, PROVAVEL_MINA, GAME_OVER, MINE } from "../../constants/constants";
+
+import "./cell.css";
 
 function Cell(props:any) {
     const { cell, gameStarted, onClickCell } :
@@ -31,12 +32,12 @@ function Cell(props:any) {
 
         console.log(`Mouse1: celula(${cell.lin}, ${cell.col})`);
 
+        cell.mine ? setState(MINE) : setState(CLICKED);
+
         onClickCell(cell);
 
-        setState(CLICKED);
-
         if (cell.mine) {
-            setContent("💣")
+            setContent("💣");
         } else {
             cell.value > 0 ? setContent(cell.value.toString()) : setContent("");
         }
@@ -68,10 +69,6 @@ function Cell(props:any) {
         }
     }
 
-    const hasValue = ():boolean => {
-        return [CLICKED, PRESENCA_MINA, PROVAVEL_MINA].includes(state);
-    }
-
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ UseEffects +----------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
@@ -80,32 +77,19 @@ function Cell(props:any) {
     // +----+ Inicalizacoes +-------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
 
-    // Para casos de re-render
-    if (cell.revelada && state != CLICKED) {
-        setState(CLICKED);
-        cell.value > 0 ? setContent(cell.value.toString()) : setContent("");
-    }
+    if (cell.revelada && [NORMAL, PRESENCA_MINA, PROVAVEL_MINA].includes(state)) {
 
-    if (gameStarted) {
-
-        cellClass = "gameStarted";
-
-        switch(state) {
-            case NORMAL:
-                break;
-            case CLICKED:
-                cellClass = " clicked";
-                break;
-            case PRESENCA_MINA:
-                cellClass += " presenca_mina";
-                break;
-            case PROVAVEL_MINA:
-                cellClass += " provavel_mina";
-                break;
-            default:
-                break;
+        if (cell.mine) {
+            setContent("💣");
+        } else {
+            cell.value > 0 ? setContent(cell.value.toString()) : setContent("");
         }
+
+        gameStarted ? setState(CLICKED) : setState(GAME_OVER);
+
     }
+
+    cellClass = gameStarted ? "gameStarted " + state : state;
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ HTML +----------------------------------------------------------------------------------------------------
@@ -117,7 +101,7 @@ function Cell(props:any) {
             onClick={handleMouse1}
             onContextMenu={handleMouse2}
         >
-            <p>{ hasValue() && content }</p>
+            <p>{ content }</p>
 
         </div>
     );

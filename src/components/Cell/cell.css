@@ -7,6 +7,7 @@
   width: 25px;
   height: 25px;
   align-items: center;
+  color: white;
 }
 
 .gameStarted {
@@ -20,10 +21,17 @@
   background-color: rgb(68, 238, 212);
 }
 
-.clicked {
+.clicked,
+.clicked:hover {
   background-image: none;
-  background-color: rgb(68, 238, 212);
+  background-color: rgb(41, 38, 38);
+  color: white;
   cursor: default;
+}
+
+.mine {
+  background-image: none;
+  background-color: #8f0909;
 }
 
 .presenca_mina {
