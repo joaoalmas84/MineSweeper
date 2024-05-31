@@ -1,14 +1,14 @@
 import { Celula } from "../interfaces/celula.interface";
 import {GAME_OVER_FASE} from "../constants/constants";
 
-function revelaMinas(board:Celula[][]):Celula[][] {
+function revelaMinas(board:Celula[][], win:boolean):Celula[][] {
     const nLin:number = board.length;
     const nCol:number = board[0].length;
 
     for (let i = 0; i < nLin; i++) {
         for (let j = 0; j < nCol; j++) {
 
-            if (board[i][j].mine) {
+            if (board[i][j].mine && !win) {
                 board[i][j].revelada = true;
             }
 

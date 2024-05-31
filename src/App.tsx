@@ -1,16 +1,17 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 
 import { Header,Menu, Board, Footer } from "./components";
 
 import { Celula } from "./interfaces/celula.interface";
+import { Game } from "./interfaces/game.interface";
 
 import createBoard from "./functions/createBoard";
 import revelaCelulasVazias from "./functions/revelaCelulasVazias";
 import revelaCelulasTodas from "./functions/revelaMinas";
 import checkClickable from "./functions/checkClickable";
+import checkWin from "./functions/checkWin";
 
 import "./App.css"
-import { Game } from "./interfaces/game.interface";
 
 function App() {
     // +----------------------------------------------------------------------------------------------------------------
@@ -38,8 +39,8 @@ function App() {
         setGameStarted(true);
     }
 
-    const handleGameOver = () => {
-        const newBoard:Celula[][] = revelaCelulasTodas(cells);
+    const handleGameOver = (win:boolean) => {
+        const newBoard:Celula[][] = revelaCelulasTodas(cells, win);
 
         console.log("Over!!!");
 
@@ -70,11 +71,14 @@ function App() {
     }
 
     const handleCellsChange = (cell:Celula) => {
+        let newBoard:Celula[][] = cells;
+
         if (cell.value == 0) {
             console.log("Empty!!!");
-            const newBoard:Celula[][] = revelaCelulasVazias(cells, cell)
-            setCells([...newBoard]);
+            newBoard = revelaCelulasVazias(cells, cell)
         }
+
+        setCells([...newBoard]);
     }
 
     const handleTimer = (seg:number) => { time = seg; }
@@ -84,8 +88,17 @@ function App() {
     }
 
     // +----------------------------------------------------------------------------------------------------------------
-    // +----+ Inicalizacoes +-------------------------------------------------------------------------------------------
+    // +----+ UseEffects +----------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
+
+    useEffect(() => {
+        console.log("CheckWin...");
+        if (checkWin(cells) && gameStarted) {
+            console.log("Win!!!");
+            handleGameOver(true);
+
+        }
+    }, [cells]);
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ HTML +----------------------------------------------------------------------------------------------------

@@ -1,3 +1,5 @@
+import {useEffect} from "react";
+
 import { Cell } from "../index.js"
 
 import { Celula } from "../../interfaces/celula.interface";
@@ -5,6 +7,7 @@ import { Celula } from "../../interfaces/celula.interface";
 import { BASICO, INTERMEDIO, AVANCADO } from "../../constants/constants"
 
 import checkClickable from "../../functions/checkClickable";
+import checkWin from "../../functions/checkWin";
 
 import "./board.css";
 
@@ -31,11 +34,12 @@ function Board(props:any) {
         if (mouse1) {
             if (cell.mine) {
                 console.log("Bomb!!!");
-                onGameOver();
+                onGameOver(false);
             } else {
                 onCellsChange(cell);
             }
         }
+
     }
 
     // +----------------------------------------------------------------------------------------------------------------

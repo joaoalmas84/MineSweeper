@@ -22,8 +22,6 @@ function Cell(props:any) {
         {estado:NORMAL, content: "", color: cell.color}
     );
 
-
-
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Variaveis +-----------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
@@ -40,7 +38,7 @@ function Cell(props:any) {
 
         if (state.estado == CLICKED || !cell.clickable) { return; }
 
-        console.log(`Mouse1: celula(${cell.lin}, ${cell.col})`);
+        cell.revelada = true;
 
         onClickCell(cell, true);
 
@@ -60,8 +58,6 @@ function Cell(props:any) {
         event.preventDefault();
 
         if (state.estado == CLICKED || !cell.clickable) { return; }
-
-        console.log(`Mouse2: celula(${cell.lin}, ${cell.col})`);
 
         onClickCell(cell, false);
 
@@ -129,7 +125,7 @@ function Cell(props:any) {
                 estado = GAME_OVER;
             }
 
-            content = "💣";
+            if (cell.revelada) { content = "💣"; }
         }
 
         cell.renderType = "";
@@ -144,15 +140,12 @@ function Cell(props:any) {
     useEffect(() => {
         switch (cell.renderType) {
             case STANDBY_FASE:
-                console.log("Standby");
                 renderStandBy();
                 break;
             case IN_GAME_FASE:
-                console.log("InGame");
                 renderInGame();
                 break;
             case GAME_OVER_FASE:
-                console.log("GameOver");
                 renderGameOver();
                 break;
             default:
