@@ -5,15 +5,14 @@ import { Timer } from "../index.js"
 import { TIMEOUTGAME_BASICO, TIMEOUTGAME_INTERMEDIO, TIMEOUTGAME_AVANCADO } from "../../constants/constants"
 
 import "./menu.css"
+import checkClickable from "../../functions/checkClickable";
 
 function Menu(props:any) {
-    const {gameStarted, onGameReset, onGameOver, selectedLevel, onLevelChange} = props;
+    const {gameStarted, onGameReset, onGameOver, selectedLevel, onLevelChange, onTimer} = props;
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ UseState Hooks +------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
-
-    const [timerStyle, setTimerStyle] = useState({});
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Variaveis +-----------------------------------------------------------------------------------------------
@@ -27,15 +26,10 @@ function Menu(props:any) {
 
     const handleClickButton = () => {
         gameStarted ? onGameOver() : onGameReset();
-        setTimerStyle({});
     }
 
     const handleTimer = (seg:number) => {
-        if (seg == 0) {
-            onGameOver();
-        } else if (seg == 9) {
-            setTimerStyle({ color: 'red' });
-        }
+        onTimer(seg);
     };
 
     // +----------------------------------------------------------------------------------------------------------------
@@ -64,12 +58,16 @@ function Menu(props:any) {
 
                 <div className="meta-data">
 
-                    <button className="start" disabled={selectedLevel === "0"} onClick={handleClickButton}>
+                    <button
+                        className="start"
+                        hidden={selectedLevel === "0"}
+                        onClick={handleClickButton}
+                    >
                         {gameStarted ? "Terminar" : "Novo Jogo"}
                     </button>
 
-                    <div className="timer" style={timerStyle}>
-                        {gameStarted && <Timer timeout={timeout} onTimer={handleTimer}/>}
+                    <div className="timer">
+                        {gameStarted && <Timer onTimer={handleTimer}/>}
                     </div>
 
                     <select id="level" defaultValue="0" hidden={gameStarted} onChange={onLevelChange}>

@@ -69,10 +69,12 @@ function Cell(props:any) {
 
         switch (state.estado) {
             case NORMAL:
+                cell.flagged = true;
                 setState({estado:PRESENCA_MINA, content:"🚩"});
                 break;
 
             case PRESENCA_MINA:
+                cell.flagged = false;
                 setState({estado:PROVAVEL_MINA, content:"?"});
                 break;
 

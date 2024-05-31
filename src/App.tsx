@@ -9,7 +9,6 @@ import revelaCelulasVazias from "./functions/revelaCelulasVazias";
 import revelaCelulasTodas from "./functions/revelaMinas";
 
 import "./App.css"
-import escondeCelulasTodas from "./functions/escondeCelulasTodas";
 import checkClickable from "./functions/checkClickable";
 
 function App() {
@@ -24,6 +23,8 @@ function App() {
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Variaveis +-----------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
+
+    let time:number = 0;
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Funcoes +-------------------------------------------------------------------------------------------------
@@ -72,6 +73,8 @@ function App() {
         }
     }
 
+    const handleTimer = (seg:number) => { time = seg; }
+
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Inicalizacoes +-------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
@@ -91,6 +94,7 @@ function App() {
                         onGameOver={handleGameOver}
                         selectedLevel={selectedLevel}
                         onLevelChange={handleLevelChange}
+                        onTimer={handleTimer}
                     />
 
                     <Board

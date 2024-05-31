@@ -2,16 +2,16 @@ import { useState, useEffect } from "react";
 
 function Timer(props: any) {
 
-    const {timeout, onTimer} = props;
+    const {onTimer} = props;
 
-    const [seconds, setSeconds] = useState(timeout);
+    const [seconds, setSeconds] = useState(0);
     const [idInterval, setIdInterval] = useState(0);
 
     let str: string;
 
     useEffect(() => {
         const interval:any = setInterval(() => {
-            setSeconds((prevSeconds:number) => prevSeconds - 1);
+            setSeconds((prevSeconds:number) => prevSeconds + 1);
         }, 1000);
 
         setIdInterval(interval);
@@ -21,8 +21,7 @@ function Timer(props: any) {
 
     useEffect(() => {
         onTimer(seconds);
-        if (seconds === 0) { clearInterval(idInterval); }
-    }, [seconds,onTimer,idInterval]);
+    }, [seconds,idInterval]);
 
     str = seconds + " seg."
 

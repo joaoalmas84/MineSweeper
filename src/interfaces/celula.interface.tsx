@@ -7,4 +7,5 @@ export interface Celula {
     clickable: boolean;
     renderType: string;
     color: any;
+    flagged: boolean;
 }

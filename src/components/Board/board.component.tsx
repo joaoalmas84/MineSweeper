@@ -81,7 +81,7 @@ function Board(props:any) {
             </div>
         );
     } else {
-        return (<div></div>);
+        return (<img src="/logo192.png"/>);
     }
 }
 
