@@ -92,11 +92,13 @@ function App() {
     // +----------------------------------------------------------------------------------------------------------------
 
     useEffect(() => {
-        console.log("CheckWin...");
-        if (checkWin(cells) && gameStarted) {
-            console.log("Win!!!");
-            handleGameOver(true);
+        if (selectedLevel != "0") {
+            console.log("CheckWin...");
+            if (checkWin(cells) && gameStarted) {
+                console.log("Win!!!");
+                handleGameOver(true);
 
+            }
         }
     }, [cells]);
 
