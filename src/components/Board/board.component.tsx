@@ -9,7 +9,7 @@ import checkClickable from "../../functions/checkClickable";
 import "./board.css";
 
 function Board(props:any) {
-    const { selectedLevel, cells, onCellsChange, gameStarted, onGameOver, onGameStart} = props
+    const { selectedLevel, cells, onCellsChange, gameStarted, onGameOver, onGameStart, onNumFlags} = props
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ UseState Hooks +------------------------------------------------------------------------------------------
@@ -63,7 +63,7 @@ function Board(props:any) {
             <div className="container">
 
                 <div id="msg" hidden={!checkClickable(cells) || gameStarted}>
-                    <p>Clica numa célula para começar a jogar!</p>
+                    <p>Clica numa célula para começares a jogar!</p>
                 </div>
 
                 <div id="board" className={classLevel}>
@@ -74,6 +74,7 @@ function Board(props:any) {
                                 cell={elem}
                                 gameStarted={gameStarted}
                                 onClickCell={handleClickCell}
+                                onNumFlags={onNumFlags}
                             />
                         ))
                     ))}

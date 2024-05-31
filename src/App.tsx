@@ -7,9 +7,10 @@ import { Celula } from "./interfaces/celula.interface";
 import createBoard from "./functions/createBoard";
 import revelaCelulasVazias from "./functions/revelaCelulasVazias";
 import revelaCelulasTodas from "./functions/revelaMinas";
+import checkClickable from "./functions/checkClickable";
 
 import "./App.css"
-import checkClickable from "./functions/checkClickable";
+import { Game } from "./interfaces/game.interface";
 
 function App() {
     // +----------------------------------------------------------------------------------------------------------------
@@ -19,6 +20,7 @@ function App() {
     const [gameStarted, setGameStarted] = useState(false);
     const [selectedLevel, setSelectedLevel] = useState("0");
     const [cells, setCells] = useState<Celula[][]>([[]]);
+    const [numFlags, setNumFlags] = useState(0);
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Variaveis +-----------------------------------------------------------------------------------------------
@@ -46,23 +48,25 @@ function App() {
     }
 
     const handleReset = () => {
-        const newBoard:Celula[][] = createBoard(selectedLevel);
-
         if (checkClickable(cells)) { return; }
 
         console.log("Reset!!!");
 
-        setCells([...newBoard]);
+        const game:Game = createBoard(selectedLevel);
+
+        setNumFlags(game.numMinas);
+        setCells([...game.board]);
     }
 
     const handleLevelChange = (event:any) => {
         const { value } = event.currentTarget;
-        const newBoard:Celula[][] = createBoard(value);
+        const game:Game = createBoard(value);
 
         console.log("levelChange");
 
         setSelectedLevel(value);
-        setCells([...newBoard]);
+        setNumFlags(game.numMinas);
+        setCells([...game.board]);
     }
 
     const handleCellsChange = (cell:Celula) => {
@@ -74,6 +78,12 @@ function App() {
     }
 
     const handleTimer = (seg:number) => { time = seg; }
+
+    const handleNumFlags = (num:number) => {
+        setNumFlags(numFlags+num);
+        console.log(`numFlags: ${numFlags}`);
+    }
+
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Inicalizacoes +-------------------------------------------------------------------------------------------
@@ -95,6 +105,7 @@ function App() {
                         selectedLevel={selectedLevel}
                         onLevelChange={handleLevelChange}
                         onTimer={handleTimer}
+                        cells={cells}
                     />
 
                     <Board
@@ -104,6 +115,7 @@ function App() {
                         gameStarted={gameStarted}
                         onGameOver={handleGameOver}
                         onGameStart={handleGameStart}
+                        onNumFlags={handleNumFlags}
                     />
                 </div>
             </div>

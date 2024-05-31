@@ -2,23 +2,17 @@ import { useState, useEffect } from "react";
 
 import { Celula } from "../../interfaces/celula.interface";
 
+import { State } from "../../interfaces/state.interface";
+
 import {
-    NORMAL,
-    CLICKED,
-    PRESENCA_MINA,
-    PROVAVEL_MINA,
-    GAME_OVER,
-    MINE,
-    STANDBY_FASE,
-    IN_GAME_FASE, GAME_OVER_FASE
+    NORMAL, CLICKED, PRESENCA_MINA, PROVAVEL_MINA, GAME_OVER,
+    MINE, STANDBY_FASE, IN_GAME_FASE, GAME_OVER_FASE
 } from "../../constants/constants";
 
 import "./cell.css";
-import { State } from "../../interfaces/state.interface";
 
 function Cell(props:any) {
-    const { cell, gameStarted, onClickCell } :
-        { cell:Celula, gameStarted:boolean, onClickCell:any } = props;
+    const { cell, gameStarted, onClickCell, onNumFlags } = props;
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ UseState Hooks +------------------------------------------------------------------------------------------
@@ -70,11 +64,13 @@ function Cell(props:any) {
         switch (state.estado) {
             case NORMAL:
                 cell.flagged = true;
+                onNumFlags(-1);
                 setState({estado:PRESENCA_MINA, content:"🚩"});
                 break;
 
             case PRESENCA_MINA:
                 cell.flagged = false;
+                onNumFlags(1);
                 setState({estado:PROVAVEL_MINA, content:"?"});
                 break;
 

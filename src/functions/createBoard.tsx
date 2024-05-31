@@ -1,7 +1,8 @@
-import { Celula } from "../interfaces/celula.interface";
 import {STANDBY_FASE} from "../constants/constants";
+import { Celula } from "../interfaces/celula.interface";
+import { Game } from "../interfaces/game.interface";
 
-function createBoard(level: string):Celula[][] {
+function createBoard(level: string):Game {
     let nMines:number, nLin:number, nCol:number;
 
     switch (level) {
@@ -31,7 +32,7 @@ function createBoard(level: string):Celula[][] {
         Array.from({ length: nCol }, (_, colIndex:number) => (
             {
                 mine: false, value: 0, lin: linIndex,  col: colIndex, revelada: false,
-                clickable: true, renderType: STANDBY_FASE, color: {}
+                clickable: true, renderType: STANDBY_FASE, color: {}, flagged: false
             }
         ))
     );
@@ -40,7 +41,9 @@ function createBoard(level: string):Celula[][] {
 
     placeValues(board, nLin, nCol);
 
-    return board;
+    let game:Game = {board:board, numMinas:nMines};
+
+    return game;
 }
 
 function placeMines(board:Celula[][], nLin:number, nCol:number, nMines:number):void {

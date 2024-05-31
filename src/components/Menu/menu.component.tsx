@@ -4,11 +4,12 @@ import { Timer } from "../index.js"
 
 import { TIMEOUTGAME_BASICO, TIMEOUTGAME_INTERMEDIO, TIMEOUTGAME_AVANCADO } from "../../constants/constants"
 
-import "./menu.css"
 import checkClickable from "../../functions/checkClickable";
 
+import "./menu.css"
+
 function Menu(props:any) {
-    const {gameStarted, onGameReset, onGameOver, selectedLevel, onLevelChange, onTimer} = props;
+    const {cells, gameStarted, onGameReset, onGameOver, selectedLevel, onLevelChange, onTimer} = props;
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ UseState Hooks +------------------------------------------------------------------------------------------
@@ -60,7 +61,7 @@ function Menu(props:any) {
 
                     <button
                         className="start"
-                        hidden={selectedLevel === "0"}
+                        hidden={selectedLevel === "0" || (!gameStarted && checkClickable(cells))}
                         onClick={handleClickButton}
                     >
                         {gameStarted ? "Terminar" : "Novo Jogo"}
