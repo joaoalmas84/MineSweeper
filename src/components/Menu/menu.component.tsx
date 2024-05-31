@@ -9,7 +9,7 @@ import checkClickable from "../../functions/checkClickable";
 import "./menu.css"
 
 function Menu(props:any) {
-    const {cells, gameStarted, onGameReset, onGameOver, selectedLevel, onLevelChange, onTimer} = props;
+    const {gameStarted, onGameReset, onGameOver, selectedLevel, onLevelChange, onTimer, cells, numFlags} = props;
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ UseState Hooks +------------------------------------------------------------------------------------------
@@ -37,18 +37,6 @@ function Menu(props:any) {
     // +----+ Render +--------------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
 
-    switch (selectedLevel) {
-        case "1":
-            timeout = TIMEOUTGAME_BASICO;
-            break;
-        case "2":
-            timeout = TIMEOUTGAME_INTERMEDIO;
-            break;
-        case "3":
-            timeout = TIMEOUTGAME_AVANCADO;
-            break;
-    }
-
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ HTML +----------------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
@@ -67,8 +55,27 @@ function Menu(props:any) {
                         {gameStarted ? "Terminar" : "Novo Jogo"}
                     </button>
 
-                    <div className="timer">
-                        {gameStarted && <Timer onTimer={handleTimer}/>}
+                    <div className="sub-container">
+
+                        <div className="num-flags">
+                            {gameStarted && <div className="flag">🚩</div>}
+                            {gameStarted &&
+                                <div className="content">
+                                    {numFlags}
+                                </div>
+                            }
+                        </div>
+
+
+                        <div className="timer">
+                            {gameStarted &&
+                                <div className="content">
+                                    {gameStarted && <Timer onTimer={handleTimer}/>}
+                                </div>
+                            }
+                            {gameStarted && "seg"}
+                        </div>
+
                     </div>
 
                     <select id="level" defaultValue="0" hidden={gameStarted} onChange={onLevelChange}>

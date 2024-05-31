@@ -25,14 +25,16 @@ function Board(props:any) {
     // +----+ Funcoes +-------------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
 
-    const handleClickCell = (cell:Celula) => {
+    const handleClickCell = (cell:Celula, mouse1:boolean) => {
         if (!gameStarted) { onGameStart(); }
 
-        if (cell.mine) {
-            console.log("Bomb!!!");
-            onGameOver();
-        } else {
-            onCellsChange(cell);
+        if (mouse1) {
+            if (cell.mine) {
+                console.log("Bomb!!!");
+                onGameOver();
+            } else {
+                onCellsChange(cell);
+            }
         }
     }
 

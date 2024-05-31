@@ -7,8 +7,6 @@ function Timer(props: any) {
     const [seconds, setSeconds] = useState(0);
     const [idInterval, setIdInterval] = useState(0);
 
-    let str: string;
-
     useEffect(() => {
         const interval:any = setInterval(() => {
             setSeconds((prevSeconds:number) => prevSeconds + 1);
@@ -23,9 +21,8 @@ function Timer(props: any) {
         onTimer(seconds);
     }, [seconds,idInterval]);
 
-    str = seconds + " seg."
 
-    return <>{str}</>;
+    return <>{seconds}</>;
 }
 
 export default Timer;

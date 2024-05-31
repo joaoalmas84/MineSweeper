@@ -81,9 +81,7 @@ function App() {
 
     const handleNumFlags = (num:number) => {
         setNumFlags(numFlags+num);
-        console.log(`numFlags: ${numFlags}`);
     }
-
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Inicalizacoes +-------------------------------------------------------------------------------------------
@@ -106,6 +104,7 @@ function App() {
                         onLevelChange={handleLevelChange}
                         onTimer={handleTimer}
                         cells={cells}
+                        numFlags={numFlags}
                     />
 
                     <Board

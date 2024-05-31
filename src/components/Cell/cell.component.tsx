@@ -19,15 +19,16 @@ function Cell(props:any) {
     // +----------------------------------------------------------------------------------------------------------------
 
     const [state, setState] = useState<State>(
-        {estado:NORMAL, content: ""}
+        {estado:NORMAL, content: "", color: cell.color}
     );
+
+
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Variaveis +-----------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
 
     let cellClass:string = "";
-    let cellStyle:any = {};
     let estado:string;
     let content:string;
 
@@ -37,45 +38,48 @@ function Cell(props:any) {
 
     const handleMouse1 = () => {
 
-        if ( state.estado == CLICKED || !cell.clickable) { return; }
+        if (state.estado == CLICKED || !cell.clickable) { return; }
 
         console.log(`Mouse1: celula(${cell.lin}, ${cell.col})`);
 
-        onClickCell(cell);
+        onClickCell(cell, true);
 
-       if (cell.mine) {
-            setState({estado:MINE, content:"💣"});
+        if (cell.mine) {
+            setState({estado:MINE, content:"💣", color: cell.color});
         } else {
             estado = CLICKED;
             content = cell.value > 0 ? cell.value.toString() : "";
 
-            setState({estado:estado, content:content});
+            setState({estado:estado, content:content, color: cell.color});
         }
 
     }
 
     const handleMouse2 = (event:any) => {
+
         event.preventDefault();
 
         if (state.estado == CLICKED || !cell.clickable) { return; }
 
         console.log(`Mouse2: celula(${cell.lin}, ${cell.col})`);
 
+        onClickCell(cell, false);
+
         switch (state.estado) {
             case NORMAL:
                 cell.flagged = true;
                 onNumFlags(-1);
-                setState({estado:PRESENCA_MINA, content:"🚩"});
+                setState({estado:PRESENCA_MINA, content:"🚩", color: cell.color});
                 break;
 
             case PRESENCA_MINA:
                 cell.flagged = false;
                 onNumFlags(1);
-                setState({estado:PROVAVEL_MINA, content:"?"});
+                setState({estado:PROVAVEL_MINA, content:"?", color: {color: "green"}});
                 break;
 
             case PROVAVEL_MINA:
-                setState({estado:NORMAL, content:""});
+                setState({estado:NORMAL, content:"", color: cell.color});
                 break;
 
             default:
@@ -88,7 +92,7 @@ function Cell(props:any) {
 
         cell.renderType = "";
 
-        setState({estado:NORMAL, content:""});
+        setState({estado:NORMAL, content:"", color: cell.color});
     }
 
     const renderInGame = () => {
@@ -100,7 +104,7 @@ function Cell(props:any) {
 
             cell.renderType = "";
 
-            setState({estado: estado, content: content});
+            setState({estado: estado, content: content, color: cell.color});
         }
 
     }
@@ -130,7 +134,7 @@ function Cell(props:any) {
 
         cell.renderType = "";
 
-        setState({estado:estado, content:content});
+        setState({estado:estado, content:content, color: cell.color});
     }
 
     // +----------------------------------------------------------------------------------------------------------------
@@ -165,7 +169,7 @@ function Cell(props:any) {
             className={"cell " + state.estado}
             onClick={handleMouse1}
             onContextMenu={handleMouse2}
-            style={cell.color}
+            style={state.color}
         >
             <p>{ state.content }</p>
 
