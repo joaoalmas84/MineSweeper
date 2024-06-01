@@ -61,6 +61,7 @@
 
 .grayscale {
     filter: grayscale(100%);
+    pointer-events: none;
 }
 
 .timer {

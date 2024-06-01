@@ -113,6 +113,12 @@ function setColor(value: number):any {
         case 4:
             cellStyle = { color: 'darkblue' };
             break;
+        case 5:
+            cellStyle = { color: 'pink' }
+            break;
+        case 6:
+            cellStyle = { color: 'orange' }
+            break;
         default:
             cellStyle = {};
             break;
