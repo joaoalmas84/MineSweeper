@@ -11,6 +11,7 @@
   display: inline-grid;
   width: fit-content;
   height: fit-content;
+  user-select:none;
 }
 
 #board.basico {

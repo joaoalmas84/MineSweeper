@@ -37,7 +37,8 @@
 .meta-data select {   
     width: fit-content;
     justify-self: center;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 
     background-color:rgb(41, 38, 38);
     border-radius: 3%;
@@ -52,10 +53,14 @@
     flex-direction: row;
     justify-content: center;
     width:fit-content;
-    gap: 45px;
+    gap: 20px;
     font-size: 20px;
     margin-bottom: 10px;
     margin-top: 10px;
+}
+
+.grayscale {
+    filter: grayscale(100%);
 }
 
 .timer {
@@ -81,7 +86,5 @@
     border-radius: 25%;
     border-color: black;
 }
-.flag {
-    transform: scale(-1, 1);
-}
+
 

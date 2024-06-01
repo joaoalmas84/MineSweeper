@@ -27,7 +27,6 @@
 
 .game_over {
   pointer-events: none;
-  user-select:none;
 }
 
 .mine {

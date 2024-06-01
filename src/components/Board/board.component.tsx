@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
 import { Cell } from "../index.js"
 
@@ -7,12 +7,12 @@ import { Celula } from "../../interfaces/celula.interface";
 import { BASICO, INTERMEDIO, AVANCADO } from "../../constants/constants"
 
 import checkClickable from "../../functions/checkClickable";
-import checkWin from "../../functions/checkWin";
 
 import "./board.css";
+import checkWin from "../../functions/checkWin";
 
 function Board(props:any) {
-    const { selectedLevel, cells, onCellsChange, gameStarted, onGameOver, onGameStart, onNumFlags} = props
+    const { selectedLevel, cells, onCellsChange, gameStarted, onGameOver, onGameStart, onNumFlags, win} = props
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ UseState Hooks +------------------------------------------------------------------------------------------
@@ -23,6 +23,8 @@ function Board(props:any) {
     // +----------------------------------------------------------------------------------------------------------------
 
     let classLevel: string;
+    let msg: string = "";
+    let msgStyle: any;
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Funcoes +-------------------------------------------------------------------------------------------------
@@ -39,8 +41,21 @@ function Board(props:any) {
                 onCellsChange(cell);
             }
         }
-
     }
+
+    // +----------------------------------------------------------------------------------------------------------------
+    // +----+ UseEffects +----------------------------------------------------------------------------------------------
+    // +----------------------------------------------------------------------------------------------------------------
+
+    useEffect(() => {
+        if (selectedLevel != "0") {
+            console.log("CheckWin...");
+            if (checkWin(cells) && gameStarted) {
+                console.log("Win!!!");
+                onGameOver(true);
+            }
+        }
+    }, [cells]);
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Render +--------------------------------------------------------------------------------------------------
@@ -61,6 +76,9 @@ function Board(props:any) {
             break;
     }
 
+    msg = win ? "Ganhaste!" : "Perdeste...";
+    msgStyle = win ? {color: "lightgreen"} : {color: "red"};
+
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ HTML +----------------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
@@ -72,6 +90,10 @@ function Board(props:any) {
                     <p>Clica numa célula para começares a jogar!</p>
                 </div>
 
+                <div id="msg" hidden={checkClickable(cells) || gameStarted} style={msgStyle}>
+                    <p>{msg}</p>
+                </div>
+
                 <div id="board" className={classLevel}>
                     {cells.map((lin: Celula[], linIndex: number) => (
                         lin.map((elem: Celula, colIndex: number) => (
@@ -81,6 +103,7 @@ function Board(props:any) {
                                 gameStarted={gameStarted}
                                 onClickCell={handleClickCell}
                                 onNumFlags={onNumFlags}
+                                win={win}
                             />
                         ))
                     ))}

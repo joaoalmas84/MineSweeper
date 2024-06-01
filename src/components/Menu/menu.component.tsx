@@ -3,6 +3,7 @@ import { Timer } from "../index.js"
 import checkClickable from "../../functions/checkClickable";
 
 import "./menu.css"
+import {useEffect, useState} from "react";
 
 function Menu(props:any) {
     const {gameStarted, onGameReset, onGameOver, selectedLevel, onLevelChange, onTimer, cells, numFlags} = props;
@@ -11,9 +12,14 @@ function Menu(props:any) {
     // +----+ UseState Hooks +------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
 
+    const [time, setTime] = useState(0)
+
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Variaveis +-----------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
+
+    let subContainerClass:string = "sub-container";
+    let selectLevelClass:string = "";
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Funcoes +-------------------------------------------------------------------------------------------------
@@ -21,15 +27,20 @@ function Menu(props:any) {
 
     const handleClickButton = () => {
         gameStarted ? onGameOver() : onGameReset();
+        setTime(0);
     }
 
     const handleTimer = (seg:number) => {
+        setTime(seg);
         if (gameStarted) { onTimer(seg); }
     };
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Render +--------------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
+
+    subContainerClass = (gameStarted || !checkClickable(cells)) ? subContainerClass : subContainerClass + " grayscale";
+    selectLevelClass = gameStarted ? "grayscale" : "";
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ HTML +----------------------------------------------------------------------------------------------------
@@ -38,41 +49,40 @@ function Menu(props:any) {
     return (
         <div className="container">
             <div className="menu">
-
                 <div className="meta-data">
 
-                    <button
-                        className="start"
-                        hidden={selectedLevel === "0" || (!gameStarted && checkClickable(cells))}
-                        onClick={handleClickButton}
-                    >
-                        {gameStarted ? "Terminar" : "Novo Jogo"}
-                    </button>
-
-                    <div className="sub-container">
+                    <div className={subContainerClass}>
 
                         <div className="num-flags">
-                            {gameStarted && <div className="flag">🚩</div>}
-                            {gameStarted &&
-                                <div className="content">
-                                    {numFlags}
-                                </div>
-                            }
+                            🚩
+                            <div className="content"> {numFlags} </div>
                         </div>
 
+                        <button
+                            className="start"
+                            onClick={handleClickButton}
+                        >
+                            {
+                                gameStarted ? "Terminar" : "Novo Jogo"
+                            }
+                        </button>
 
                         <div className="timer">
-                            {gameStarted &&
-                                <div className="content">
-                                    {gameStarted && <Timer onTimer={handleTimer}/>}
-                                </div>
-                            }
-                            {gameStarted && "seg"}
+                            <div className="content">
+                                {gameStarted ? <Timer onTimer={handleTimer}/> : time}
+                            </div>
+                            seg
                         </div>
 
                     </div>
 
-                    <select id="level" defaultValue="0" hidden={gameStarted} onChange={onLevelChange}>
+                    <select
+                        id="level"
+                        className={selectLevelClass}
+                        disabled={gameStarted}
+                        defaultValue="0"
+                        onChange={onLevelChange}
+                    >
 
                         <option value="0">Nível...</option>
                         <option value="1">Básico</option>
@@ -82,7 +92,6 @@ function Menu(props:any) {
                     </select>
 
                 </div>
-
             </div>
         </div>
     );

@@ -22,6 +22,7 @@ function App() {
     const [selectedLevel, setSelectedLevel] = useState("0");
     const [cells, setCells] = useState<Celula[][]>([[]]);
     const [numFlags, setNumFlags] = useState(0);
+    const [win, setWin] = useState (false);
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Variaveis +-----------------------------------------------------------------------------------------------
@@ -35,12 +36,13 @@ function App() {
 
     const handleGameStart = () => {
         console.log("Start!!!");
-
         setGameStarted(true);
     }
 
     const handleGameOver = (win:boolean) => {
         const newBoard:Celula[][] = revelaCelulasTodas(cells, win);
+
+        setWin(win);
 
         console.log("Over!!!");
 
@@ -49,18 +51,20 @@ function App() {
     }
 
     const handleReset = () => {
-        if (checkClickable(cells)) { return; }
+        const game:Game = createBoard(selectedLevel);
 
         console.log("Reset!!!");
 
-        const game:Game = createBoard(selectedLevel);
-
+        setWin(false);
         setNumFlags(game.numMinas);
         setCells([...game.board]);
     }
 
     const handleLevelChange = (event:any) => {
         const { value } = event.currentTarget;
+
+        handleReset();
+
         const game:Game = createBoard(value);
 
         console.log("levelChange");
@@ -86,21 +90,6 @@ function App() {
     const handleNumFlags = (num:number) => {
         setNumFlags(numFlags+num);
     }
-
-    // +----------------------------------------------------------------------------------------------------------------
-    // +----+ UseEffects +----------------------------------------------------------------------------------------------
-    // +----------------------------------------------------------------------------------------------------------------
-
-    useEffect(() => {
-        if (selectedLevel != "0") {
-            console.log("CheckWin...");
-            if (checkWin(cells) && gameStarted) {
-                console.log("Win!!!");
-                handleGameOver(true);
-
-            }
-        }
-    }, [cells]);
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ HTML +----------------------------------------------------------------------------------------------------
@@ -130,6 +119,7 @@ function App() {
                         onGameOver={handleGameOver}
                         onGameStart={handleGameStart}
                         onNumFlags={handleNumFlags}
+                        win={win}
                     />
                 </div>
             </div>

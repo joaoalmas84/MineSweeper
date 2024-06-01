@@ -1,6 +1,7 @@
 import {Celula} from "../interfaces/celula.interface";
 
 function checkClickable(board:Celula[][]):boolean {
+    if (board.length == 0) {return true;}
     const nLin:number = board.length;
     const nCol:number = board[0].length;
 

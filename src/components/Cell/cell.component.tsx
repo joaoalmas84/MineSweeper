@@ -12,7 +12,7 @@ import {
 import "./cell.css";
 
 function Cell(props:any) {
-    const { cell, gameStarted, onClickCell, onNumFlags } = props;
+    const { cell, gameStarted, onClickCell, onNumFlags, win } = props;
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ UseState Hooks +------------------------------------------------------------------------------------------
@@ -105,7 +105,7 @@ function Cell(props:any) {
 
     }
 
-    const renderGameOver = () => {
+    const renderGameOverLose = () => {
 
         if (!cell.mine) {
 
@@ -115,7 +115,7 @@ function Cell(props:any) {
                 estado = GAME_OVER;
             }
 
-            content = state.content;
+            content = (state.estado == PROVAVEL_MINA) ? "" : state.content;
 
         } else {
 
@@ -126,6 +126,20 @@ function Cell(props:any) {
             }
 
             if (cell.revelada) { content = "💣"; }
+        }
+
+        cell.renderType = "";
+
+        setState({estado:estado, content:content, color: cell.color});
+    }
+
+    const renderGameOverWin = () => {
+
+        if (state.estado != NORMAL) {
+            estado = state.estado + " " + GAME_OVER;
+            content = state.content;
+        } else {
+            estado = GAME_OVER;
         }
 
         cell.renderType = "";
@@ -146,7 +160,7 @@ function Cell(props:any) {
                 renderInGame();
                 break;
             case GAME_OVER_FASE:
-                renderGameOver();
+                win ? renderGameOverWin() : renderGameOverLose();
                 break;
             default:
                 break;
