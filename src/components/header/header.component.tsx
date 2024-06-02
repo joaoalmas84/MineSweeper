@@ -5,7 +5,7 @@ import "./header.css"
 function Header() {
   return (
     <header>
-        <h1>MINE SWEEPER</h1>
+        <h1>MINESWEEPER</h1>
     </header>
 
   );

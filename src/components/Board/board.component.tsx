@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect } from "react";
 
 import { Cell } from "../index.js"
 
@@ -7,16 +7,12 @@ import { Celula } from "../../interfaces/celula.interface";
 import { BASICO, INTERMEDIO, AVANCADO } from "../../constants/constants"
 
 import checkClickable from "../../functions/checkClickable";
+import checkWin from "../../functions/checkWin";
 
 import "./board.css";
-import checkWin from "../../functions/checkWin";
 
 function Board(props:any) {
     const { selectedLevel, cells, onCellsChange, gameStarted, onGameOver, onGameStart, onNumFlags, win} = props
-
-    // +----------------------------------------------------------------------------------------------------------------
-    // +----+ UseState Hooks +------------------------------------------------------------------------------------------
-    // +----------------------------------------------------------------------------------------------------------------
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Variaveis +-----------------------------------------------------------------------------------------------
@@ -35,7 +31,7 @@ function Board(props:any) {
 
         if (mouse1) {
             if (cell.mine) {
-                console.log("Bomb!!!");
+                console.log("Bomb");
                 onGameOver(false);
             } else {
                 onCellsChange(cell);
@@ -49,7 +45,6 @@ function Board(props:any) {
 
     useEffect(() => {
         if (selectedLevel != "0") {
-            console.log("CheckWin...");
             if (checkWin(cells) && gameStarted) {
                 console.log("Win!!!");
                 onGameOver(true);
@@ -82,6 +77,7 @@ function Board(props:any) {
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ HTML +----------------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
+
     if (classLevel != "") {
         return (
             <div className="container">
@@ -100,7 +96,6 @@ function Board(props:any) {
                             <Cell
                                 key={`${linIndex}-${colIndex}`}
                                 cell={elem}
-                                gameStarted={gameStarted}
                                 onClickCell={handleClickCell}
                                 onNumFlags={onNumFlags}
                                 win={win}

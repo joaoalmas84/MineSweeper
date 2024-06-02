@@ -1,12 +1,13 @@
+import { useState } from "react";
+
 import { Timer } from "../index.js"
 
 import checkClickable from "../../functions/checkClickable";
 
 import "./menu.css"
-import {useEffect, useState} from "react";
 
 function Menu(props:any) {
-    const {gameStarted, onGameReset, onGameOver, selectedLevel, onLevelChange, onTimer, cells, numFlags} = props;
+    const {gameStarted, onGameReset, onGameOver, onLevelChange, cells, numFlags} = props;
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ UseState Hooks +------------------------------------------------------------------------------------------
@@ -32,7 +33,6 @@ function Menu(props:any) {
 
     const handleTimer = (seg:number) => {
         setTime(seg);
-        if (gameStarted) { onTimer(seg); }
     };
 
     // +----------------------------------------------------------------------------------------------------------------

@@ -21,7 +21,6 @@ function Timer(props: any) {
         onTimer(seconds);
     }, [seconds,idInterval]);
 
-
     return <>{seconds}</>;
 }
 

@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 
-import { Celula } from "../../interfaces/celula.interface";
-
 import { State } from "../../interfaces/state.interface";
 
 import {
@@ -12,7 +10,7 @@ import {
 import "./cell.css";
 
 function Cell(props:any) {
-    const { cell, gameStarted, onClickCell, onNumFlags, win } = props;
+    const { cell, onClickCell, onNumFlags, win } = props;
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ UseState Hooks +------------------------------------------------------------------------------------------
@@ -25,10 +23,10 @@ function Cell(props:any) {
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Variaveis +-----------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
-
-    let cellClass:string = "";
+    // Estas são por e simplesmente variáveis auxiliares
     let estado:string;
     let content:string;
+    let color: any;
 
     // +----------------------------------------------------------------------------------------------------------------
     // +----+ Funcoes +-------------------------------------------------------------------------------------------------
@@ -84,8 +82,6 @@ function Cell(props:any) {
     }
 
     const renderStandBy = () => {
-        cellClass = estado != NORMAL ? estado : "";
-
         cell.renderType = "";
 
         setState({estado:NORMAL, content:"", color: cell.color});
@@ -109,13 +105,14 @@ function Cell(props:any) {
 
         if (!cell.mine) {
 
-            if (state.estado == CLICKED) {
+            if (state.estado != NORMAL) {
                 estado = state.estado + " " + GAME_OVER;
+                content = state.content;
+                color = state.color;
             } else {
                 estado = GAME_OVER;
+                color = cell.color;
             }
-
-            content = (state.estado == PROVAVEL_MINA) ? "" : state.content;
 
         } else {
 
@@ -130,7 +127,7 @@ function Cell(props:any) {
 
         cell.renderType = "";
 
-        setState({estado:estado, content:content, color: cell.color});
+        setState({estado:estado, content:content, color: color});
     }
 
     const renderGameOverWin = () => {
@@ -138,13 +135,15 @@ function Cell(props:any) {
         if (state.estado != NORMAL) {
             estado = state.estado + " " + GAME_OVER;
             content = state.content;
+            color = state.color;
         } else {
             estado = GAME_OVER;
+            color = cell.color;
         }
 
         cell.renderType = "";
 
-        setState({estado:estado, content:content, color: cell.color});
+        setState({estado:estado, content:content, color: color});
     }
 
     // +----------------------------------------------------------------------------------------------------------------

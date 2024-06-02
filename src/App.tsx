@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useState } from "react";
 
 import { Header,Menu, Board, Footer } from "./components";
 
@@ -7,9 +7,7 @@ import { Game } from "./interfaces/game.interface";
 
 import createBoard from "./functions/createBoard";
 import revelaCelulasVazias from "./functions/revelaCelulasVazias";
-import revelaCelulasTodas from "./functions/revelaMinas";
-import checkClickable from "./functions/checkClickable";
-import checkWin from "./functions/checkWin";
+import revelaMinas from "./functions/revelaMinas";
 
 import "./App.css"
 
@@ -25,12 +23,6 @@ function App() {
     const [win, setWin] = useState (false);
 
     // +----------------------------------------------------------------------------------------------------------------
-    // +----+ Variaveis +-----------------------------------------------------------------------------------------------
-    // +----------------------------------------------------------------------------------------------------------------
-
-    let time:number = 0;
-
-    // +----------------------------------------------------------------------------------------------------------------
     // +----+ Funcoes +-------------------------------------------------------------------------------------------------
     // +----------------------------------------------------------------------------------------------------------------
 
@@ -40,11 +32,11 @@ function App() {
     }
 
     const handleGameOver = (win:boolean) => {
-        const newBoard:Celula[][] = revelaCelulasTodas(cells, win);
+        const newBoard:Celula[][] = revelaMinas(cells, win);
 
         setWin(win);
 
-        console.log("Over!!!");
+        console.log("GameOver");
 
         setCells([...newBoard]);
         setGameStarted(false);
@@ -53,7 +45,7 @@ function App() {
     const handleReset = () => {
         const game:Game = createBoard(selectedLevel);
 
-        console.log("Reset!!!");
+        console.log("Reset");
 
         setWin(false);
         setNumFlags(game.numMinas);
@@ -67,7 +59,7 @@ function App() {
 
         const game:Game = createBoard(value);
 
-        console.log("levelChange");
+        console.log("LevelChange");
 
         setSelectedLevel(value);
         setNumFlags(game.numMinas);
@@ -78,17 +70,15 @@ function App() {
         let newBoard:Celula[][] = cells;
 
         if (cell.value == 0) {
-            console.log("Empty!!!");
+            console.log("EmptyCell");
             newBoard = revelaCelulasVazias(cells, cell)
         }
 
         setCells([...newBoard]);
     }
 
-    const handleTimer = (seg:number) => { time = seg; }
-
     const handleNumFlags = (num:number) => {
-        setNumFlags(numFlags+num);
+        setNumFlags(numFlags + num);
     }
 
     // +----------------------------------------------------------------------------------------------------------------
@@ -106,7 +96,6 @@ function App() {
                         onGameOver={handleGameOver}
                         selectedLevel={selectedLevel}
                         onLevelChange={handleLevelChange}
-                        onTimer={handleTimer}
                         cells={cells}
                         numFlags={numFlags}
                     />

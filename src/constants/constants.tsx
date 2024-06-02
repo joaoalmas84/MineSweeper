@@ -1,8 +1,3 @@
-// Timeouts
-export const TIMEOUTGAME_BASICO: number = 60
-export const TIMEOUTGAME_INTERMEDIO: number = 60
-export const TIMEOUTGAME_AVANCADO: number = 180
-
 // States da celula
 export const NORMAL: string = "normal";
 export const CLICKED: string = "clicked";
