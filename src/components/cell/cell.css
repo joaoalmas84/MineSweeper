@@ -1,0 +1,59 @@
+.cell {
+  display: grid;
+  border: 1px solid black;
+  display: inline-block;
+  background-image: linear-gradient(to bottom right, rgb(0, 119, 255), rgb(68, 227, 238));
+  font-family:'Didot', Didot, monospace;
+  width: 25px;
+  height: 25px;
+  align-items: center;
+  color: white;
+}
+
+.cell:hover {
+  background-image: none;
+  background-color: rgb(68, 238, 212);
+  justify-content: center;
+  cursor: pointer;
+}
+
+.clicked,
+.clicked:hover {
+  background-image: none;
+  background-color: rgb(41, 38, 38);
+  color: white;
+  cursor: default;
+}
+
+.game_over {
+  pointer-events: none;
+}
+
+.mine {
+  background-image: none;
+  background-color: #8f0909;
+  pointer-events: none;
+}
+
+.presenca_mina {
+  background-image: linear-gradient(to bottom right, rgb(196, 132, 8), rgb(255, 204, 0));
+}
+
+.presenca_mina:hover {
+  background-color: rgb(238, 179, 68);
+}
+
+.provavel_mina {
+  background-image: linear-gradient(to bottom right, rgb(68, 157, 21), rgb(85, 255, 0));
+  color: green;
+  font-weight: 600;
+}
+
+.provavel_mina:hover {
+  background-color: rgb(125, 238, 68);
+}
+
+p {
+  justify-self: center;
+  font-weight: 600;
+}

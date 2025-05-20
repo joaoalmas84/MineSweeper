@@ -1,0 +1,91 @@
+.container {
+    padding: 0px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+
+    font-family:'Didot', Didot, monospace;
+    color: rgb(68, 198, 238);
+}
+
+.start:enabled:hover {
+    cursor: pointer;
+}
+
+#level {
+    cursor: pointer;
+}
+
+.meta-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.meta-data button {
+    width: fit-content;
+    justify-self: center;
+    background-color:rgb(41, 38, 38);
+    font-family:'Didot', Didot, monospace;
+    font-size: 20px;
+    color: rgb(68, 198, 238);
+    border-radius: 10%;
+}
+
+.meta-data select {   
+    width: fit-content;
+    justify-self: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    background-color:rgb(41, 38, 38);
+    border-radius: 3%;
+    border-color: rgb(41, 38, 38);
+    font-family:'Didot', Didot, monospace;
+    font-size: 20px;
+    color: rgb(68, 198, 238);
+}
+
+.sub-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width:fit-content;
+    gap: 20px;
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.grayscale {
+    filter: grayscale(100%);
+    pointer-events: none;
+}
+
+.timer {
+    display: flex;
+    justify-content: center;
+    height: fit-content;
+    gap: 2px;
+}
+
+.num-flags {
+    display: flex;
+    justify-content: center;
+    height: fit-content;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    width: 40px;
+    height: fit-content;
+    background-color: rgb(41, 38, 38);
+    padding: 2px;
+    border-radius: 25%;
+    border-color: black;
+}
+
+

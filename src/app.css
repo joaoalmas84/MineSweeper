@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap');
+
+html {
+    background-color:rgb(41, 38, 38);
+    font-family: 'Orbitron', sans-serif;
+}
+
+.App {
+    display: grid;
+    justify-content: center;
+
+    width: fit-content;
+    height: fit-content;
+
+    padding: 20px;
+    padding-bottom: 40px;
+
+    border-radius: 25px;
+    background-color: rgb(29, 27, 27);
+}
+
+.container {
+    display: flex;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+}

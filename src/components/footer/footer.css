@@ -1,0 +1,17 @@
+footer a {
+    margin: 20px;
+    display: grid;
+    justify-content: center;
+    color: rgb(112, 112, 112);
+    font-family:'Didot', Didot, monospace;
+    text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+p {
+  text-align: center;  
+  margin: 0;
+}

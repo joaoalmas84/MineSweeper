@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  padding: 0;
+  flex-direction: column;
+  align-items: center;
+}
+
+#board {
+  background-color:black;
+  border: solid 1px black;
+  display: inline-grid;
+  width: fit-content;
+  height: fit-content;
+  user-select:none;
+}
+
+#board.basico {
+  grid-template-columns: repeat(9, auto);
+}
+
+#board.intermedio {
+  grid-template-columns: repeat(16, auto);
+}
+
+#board.avancado {
+  grid-template-columns: repeat(16, auto);
+}
+
+#msg {
+  font-family:'Didot', Didot, monospace;
+  font-size: 15px;
+  color: rgb(68, 198, 238);
+  margin-bottom: 10px;
+}
