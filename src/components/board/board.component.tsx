@@ -71,7 +71,7 @@ function Board(props:any) {
             break;
     }
 
-    msg = win ? "Ganhaste!" : "Perdeste...";
+    msg = win ? "GREAT!" : "Better luck next time...";
     msgStyle = win ? {color: "lightgreen"} : {color: "red"};
 
     // +----------------------------------------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ function Board(props:any) {
             <div className="container">
 
                 <div id="msg" hidden={!checkClickable(cells) || gameStarted}>
-                    <p>Clica numa célula para começares a jogar!</p>
+                    <p>Click on a cell to start the counter!</p>
                 </div>
 
                 <div id="msg" hidden={checkClickable(cells) || gameStarted} style={msgStyle}>

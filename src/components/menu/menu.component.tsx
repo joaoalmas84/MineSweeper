@@ -63,7 +63,7 @@ function Menu(props:any) {
                             onClick={handleClickButton}
                         >
                             {
-                                gameStarted ? "Terminar" : "Novo Jogo"
+                                gameStarted ? "Stop" : "New Game"
                             }
                         </button>
 
@@ -71,7 +71,7 @@ function Menu(props:any) {
                             <div className="content">
                                 {gameStarted ? <Timer onTimer={handleTimer}/> : time}
                             </div>
-                            seg
+                            sec
                         </div>
 
                     </div>
@@ -84,10 +84,10 @@ function Menu(props:any) {
                         onChange={onLevelChange}
                     >
 
-                        <option value="0">Nível...</option>
-                        <option value="1">Básico</option>
-                        <option value="2">Intermédio</option>
-                        <option value="3">Avançado</option>
+                        <option value="0">Level...</option>
+                        <option value="1">Basic</option>
+                        <option value="2">Intermediate</option>
+                        <option value="3">Advanced</option>
 
                     </select>
 

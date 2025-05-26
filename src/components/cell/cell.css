@@ -1,5 +1,4 @@
 .cell {
-  display: grid;
   border: 1px solid black;
   display: inline-block;
   background-image: linear-gradient(to bottom right, rgb(0, 119, 255), rgb(68, 227, 238));

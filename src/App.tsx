@@ -86,34 +86,56 @@ function App() {
     // +----------------------------------------------------------------------------------------------------------------
 
     return (
-        <div className="container">
-            <Header />
-            <div className="App">
-                <div className="container">
-                    <Menu
-                        gameStarted={gameStarted}
-                        onGameReset={handleReset}
-                        onGameOver={handleGameOver}
-                        selectedLevel={selectedLevel}
-                        onLevelChange={handleLevelChange}
-                        cells={cells}
-                        numFlags={numFlags}
-                    />
+        <>
+            <div className="container">
+                <Header />
 
-                    <Board
-                        selectedLevel={selectedLevel}
-                        cells={cells}
-                        onCellsChange={handleCellsChange}
-                        gameStarted={gameStarted}
-                        onGameOver={handleGameOver}
-                        onGameStart={handleGameStart}
-                        onNumFlags={handleNumFlags}
-                        win={win}
-                    />
+
+                <div className="App">
+                    <div className="container">
+                        <Menu
+                            gameStarted={gameStarted}
+                            onGameReset={handleReset}
+                            onGameOver={handleGameOver}
+                            selectedLevel={selectedLevel}
+                            onLevelChange={handleLevelChange}
+                            cells={cells}
+                            numFlags={numFlags}
+                        />
+
+                        <Board
+                            selectedLevel={selectedLevel}
+                            cells={cells}
+                            onCellsChange={handleCellsChange}
+                            gameStarted={gameStarted}
+                            onGameOver={handleGameOver}
+                            onGameStart={handleGameStart}
+                            onNumFlags={handleNumFlags}
+                            win={win}
+                        />
+                    </div>
+                </div>
+                <Footer />
+            </div>
+
+
+            <div className="info-panel">
+                <div>
+                    <h2>How to Play</h2>
+                    <p>Start by choosing a difficulty level from the menu to generate the game<br/> board.</p>
+                    <ul>
+                        <li><strong>Left Click</strong>: Reveal a cell.</li>
+                        <li><strong>Right Click</strong>: 1x -{">"} Flag <div className="flag">🚩</div>, 2x -{">"} mark <div className="mark">?</div> signal cell as a possible mine.</li>
+                        <li>Reveal all non-mine cells to win the game.</li>
+                        <li>Use flags to track where you think mines are located.</li>
+                        <li>Game ends when you hit a mine or successfully clear the board.</li>
+                        <li>The timer begins on your first click.</li>
+                    </ul>
                 </div>
             </div>
-            <Footer />
-        </div>
+
+
+        </>
     );
 }
 

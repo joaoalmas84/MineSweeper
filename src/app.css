@@ -24,4 +24,45 @@ html {
     padding: 0;
     justify-content: center;
     align-items: center;
+    width: 100%;
+}
+
+.info-panel {
+    display: flex;
+    align-content: flex-start;
+    justify-content: flex-start;
+    color: rgb(68, 198, 238);
+    width: 750px;
+    position: absolute;
+    left: 64%;
+    top: 15%;
+}
+
+.info-panel p {
+    text-align: left;
+}
+
+.flag {
+    background-image: linear-gradient(to bottom right, rgb(196, 132, 8), rgb(255, 204, 0));
+    width: 25px;
+    height: 23px;
+    align-items: center;
+    justify-content: center;
+    display: inline-block;
+    text-align: center;
+    border: 2px solid black;
+}
+
+.mark {
+    background-image: linear-gradient(to bottom right, rgb(68, 157, 21), rgb(85, 255, 0));
+    color: green;
+    font-weight: 600;
+    font-family:'Didot', Didot, monospace;
+    width: 25px;
+    height: 23px;
+    align-items: center;
+    justify-content: center;
+    display: inline-block;
+    text-align: center;
+    border: 2px solid black;
 }
